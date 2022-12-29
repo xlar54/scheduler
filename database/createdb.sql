@@ -1,10 +1,9 @@
 create database scheduler;
 use scheduler;
 
-CREATE USER sqluser IDENTIFIED BY 'sqluserpw';
+CREATE USER scheduleruser IDENTIFIED BY 'freddy!@';
 
-grant usage on *.* to sqluser@localhost identified by 'sqluserpw';
-grant all privileges on scheduler.* to sqluser@localhost;
+
 
 SET FOREIGN_KEY_CHECKS = 0;
 drop table apppintments;
