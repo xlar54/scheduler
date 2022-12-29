@@ -1,9 +1,9 @@
-module com.example.schedular {
+module com.schedular.app {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
 
 
-    opens com.example.schedular to javafx.fxml;
-    exports com.example.schedular;
+    opens com.scheduler.app to javafx.fxml;
+    exports com.scheduler.app;
 }

@@ -1,4 +1,4 @@
-package com.example.schedular;
+package com.scheduler.app;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

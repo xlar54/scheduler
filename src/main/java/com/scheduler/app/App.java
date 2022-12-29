@@ -1,16 +1,15 @@
-package com.example.schedular;
+package com.scheduler.app;
 
 import java.sql.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.Locale;
 
+import com.scheduler.pojo.*;
+import com.scheduler.dao.*;
 
 public class App extends Application {
 
@@ -22,7 +21,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException
     {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("com.scheduler.primary.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 640);
         stage.setTitle("Schedule Application");
         stage.setScene(scene);
@@ -49,7 +48,14 @@ public class App extends Application {
 
 
 
-        public static void main (String[]args){
+        public static void main (String[]args) throws Exception {
+
+
+            /*Countries country = new Countries();
+            CountryDAO countryDAO = new CountryDAO();
+            country = countryDAO.getCountry(1);
+
+            System.out.println(country.getCountry());*/
             launch();
         }
     }

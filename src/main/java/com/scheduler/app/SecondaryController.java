@@ -1,4 +1,4 @@
-package com.example.schedular;
+package com.scheduler.app;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
