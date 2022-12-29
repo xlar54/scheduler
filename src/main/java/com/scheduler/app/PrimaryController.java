@@ -34,9 +34,9 @@ public class PrimaryController {
     TextField userNameField;
     @FXML
     TextField passwordField;
-    static final String DB_URL = "jdbc:mysql://localhost:3306/schedular";
-    static final String USER = "nicholas";
-    static final String PASS = "Freddy12!@";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/scheduler";
+    static final String USER = "scheduleruser";
+    static final String PASS = "freddy!@";
     @FXML
     Label zoneID = new Label();
     @FXML
@@ -194,7 +194,7 @@ public class PrimaryController {
         }
         Window window = signIn.getScene().getWindow();
         Stage stage = (Stage) signIn.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("secondary.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/secondary.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 640);
         stage.setTitle("Schedule Application");
 

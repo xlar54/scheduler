@@ -21,7 +21,7 @@ public class CountryDAO {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/schedular", "nicholas", "Freddy12!@");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost/scheduler", "scheduleruser", "freddy!@");
 
 
             statement = connect.createStatement();

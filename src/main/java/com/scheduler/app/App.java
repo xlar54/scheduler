@@ -14,14 +14,14 @@ import com.scheduler.dao.*;
 public class App extends Application {
 
 
-    static final String DB_URL = "jdbc:mysql://localhost:3306/schedular";
-    static final String USER = "nicholas";
-    static final String PASS = "Freddy12!@";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/scheduler";
+    static final String USER = "scheduleruser";
+    static final String PASS = "freddy!@";
     static final String QUERY = "desc appointments";
     public void start(Stage stage) throws IOException
     {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("com.scheduler.primary.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/primary.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 640);
         stage.setTitle("Schedule Application");
         stage.setScene(scene);
