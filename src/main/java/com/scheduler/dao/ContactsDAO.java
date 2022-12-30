@@ -77,7 +77,7 @@ public class ContactsDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setString(1, country);
+            preparedStatement.setString(1, contact);
             preparedStatement.setTimestamp(2, timestamp);
             preparedStatement.setString(3, username);
             preparedStatement.setTimestamp(4, timestamp);
