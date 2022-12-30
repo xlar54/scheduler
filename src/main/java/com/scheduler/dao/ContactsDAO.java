@@ -66,7 +66,7 @@ public class ContactsDAO {
                 "values (?,?,?,?,?)";
 
         try {
-
+//
             Calendar cal = Calendar.getInstance();
             java.sql.Timestamp timestamp = new java.sql.Timestamp(cal.getTimeInMillis());
 
