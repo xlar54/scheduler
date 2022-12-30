@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import com.scheduler.pojo.*;
 import com.scheduler.dao.*;
+import com.scheduler.dao.ContactsDAO;
 
 public class App extends Application {
 
@@ -60,9 +61,13 @@ public class App extends Application {
             //System.out.println(count);
         }
 
-    public static void nickstestcode() {
+    public static void nickstestcode() throws Exception {
 
-        // this is just a temp function to test code.  delete when done
+        ContactsDAO contactsDAO = new ContactsDAO();
+
+        //Contact contact = new Contact();
+      //  contact = contactsDAO.getByID(1);
+       // System.out.println(contact.getContact_name());
 
     }
 }

@@ -232,7 +232,7 @@ public class PrimaryController {
                 });
 
                 customerData.getColumns().addAll(col);
-                System.out.println("Column ["+i+"] ");
+               // System.out.println("Column ["+i+"] ");
             }
 
             /********************************
@@ -245,7 +245,7 @@ public class PrimaryController {
                     //Iterate Column
                     row.add(rs.getString(i));
                 }
-                System.out.println("Row [1] added "+row );
+              //  System.out.println("Row [1] added "+row );
                 data.add(row);
 
             }
@@ -254,7 +254,7 @@ public class PrimaryController {
             customerData.setItems(data);
         }catch(Exception e){
             e.printStackTrace();
-            System.out.println("Error on Building Data");
+            //System.out.println("Error on Building Data");
         }
     }
 
