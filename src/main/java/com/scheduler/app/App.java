@@ -55,8 +55,8 @@ public class App extends Application {
             FileLogger f = FileLogger.getInstance();
             f.info("hello");
 
-            //CustomerDAO customerDAO = new CustomerDAO();
-            //int count = customerDAO.update(3,"Mike Wilson", "776 Noola Ave", "88756", "666-775-7645", 2, "scott");
+            //UserDAO userDAO = new UserDAO();
+            //int count = userDAO.delete(3);
             //System.out.println(count);
         }
 
