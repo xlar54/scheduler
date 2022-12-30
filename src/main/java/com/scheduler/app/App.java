@@ -6,12 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import com.scheduler.pojo.*;
-import com.scheduler.dao.*;
-
 public class App extends Application {
 
 
+    public static void main (String[]args) throws Exception {
+
+        nickstestcode();
+        dadstestcode();
+        launch();
+    }
     public void start(Stage stage) throws IOException
     {
 
@@ -19,7 +22,7 @@ public class App extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 500, 640);
         stage.setTitle("Schedule Application");
         stage.setScene(scene);
-        PrimaryController controller = fxmlLoader.getController();
+        loginController controller = fxmlLoader.getController();
         int x = controller.setLanguage();
 
         if (x==1)
@@ -29,15 +32,6 @@ public class App extends Application {
         stage.show();
 
     }
-
-
-
-        public static void main (String[]args) throws Exception {
-
-            nickstestcode();
-            dadstestcode();
-            launch();
-        }
 
         public static void dadstestcode() throws Exception {
 

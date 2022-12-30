@@ -13,12 +13,25 @@ public class Translation {
         LOGIN_FORM_HEADER,
         USERNAME_LABEL,
         PASSWORD_LABEL,
-        SIGN_IN_BUTTON
+        SIGN_IN_BUTTON,
+        LOGIN_SUCCESSFUL,
+        LOGIN_TRY_AGAIN
     }
     private Dictionary engDict = new Hashtable();
     private Dictionary frDict = new Hashtable();
 
-    public Translation() {
+    private static Translation single_instance = null;
+
+    public static Translation getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new Translation();
+
+        single_instance.initialize();
+
+        return single_instance;
+    }
+    private void initialize() {
 
         // set up the dictionary
         // English
@@ -26,12 +39,16 @@ public class Translation {
         engDict.put(LanguageKey.USERNAME_LABEL, "Username");
         engDict.put(LanguageKey.PASSWORD_LABEL, "Password");
         engDict.put(LanguageKey.SIGN_IN_BUTTON, "Sign In");
+        engDict.put(LanguageKey.LOGIN_SUCCESSFUL, "Login Successful");
+        engDict.put(LanguageKey.LOGIN_TRY_AGAIN, "Username or password not found. Try again.");
 
         //French
         frDict.put(LanguageKey.LOGIN_FORM_HEADER,"Utilisateur en ligne");
         frDict.put(LanguageKey.USERNAME_LABEL, "Nom d'utilisateur");
         frDict.put(LanguageKey.PASSWORD_LABEL, "Mot de passe");
         frDict.put(LanguageKey.SIGN_IN_BUTTON, "S'identifier");
+        frDict.put(LanguageKey.LOGIN_SUCCESSFUL, "Connexion réussie");
+        frDict.put(LanguageKey.LOGIN_TRY_AGAIN, "Nom d'utilisateur ou mot de passe introuvable. Réessayer.");
 
     }
 
