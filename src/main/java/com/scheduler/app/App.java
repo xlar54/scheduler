@@ -64,10 +64,7 @@ public class App extends Application {
     public static void nickstestcode() throws Exception {
 
         ContactsDAO contactsDAO = new ContactsDAO();
-
-        //Contact contact = new Contact();
-      //  contact = contactsDAO.getByID(1);
-       // System.out.println(contact.getContact_name());
+        contactsDAO.update(3, "nickybae", "email.address@.com");
 
     }
 }

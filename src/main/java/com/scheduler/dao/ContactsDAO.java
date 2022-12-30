@@ -58,12 +58,12 @@ public class ContactsDAO {
         }
     }
 
-    public int insert(String contact, String username) throws Exception {
+    public int insert(String Contact_Name, String Email ) throws Exception {
 
         int count = 0;
         final String sql = "insert into Contacts" +
-                "(Contacts)" +
-                "values (?,?,?,?,?)";
+                "(Contact_Name, Email)" +
+                "values (?,?)";
 
         try {
 
@@ -77,11 +77,9 @@ public class ContactsDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setString(1, contact);
-            preparedStatement.setTimestamp(2, timestamp);
-            preparedStatement.setString(3, username);
-            preparedStatement.setTimestamp(4, timestamp);
-            preparedStatement.setString(5, username);
+            preparedStatement.setString(1, Contact_Name);
+            preparedStatement.setString(2, Email);
+
 
             // execute query
             count = preparedStatement.executeUpdate();
@@ -105,12 +103,12 @@ public class ContactsDAO {
         }
     }
 
-    public int update(int countryId, String country, String username) throws Exception {
+    public int update(int Contact_ID, String Contact_Name, String Email) throws Exception {
 
         int count = 0;
-        final String sql = "update Countries " +
-                "set Country=?, Last_Update=?, Last_Updated_By=?" +
-                "where Country_ID=?";
+        final String sql = "update Contacts " +
+                "set Contact_Name=?, Email=?"+
+                "where Contact_ID=?";
 
         try {
 
@@ -124,10 +122,9 @@ public class ContactsDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setString(1, country);
-            preparedStatement.setTimestamp(2, timestamp);
-            preparedStatement.setString(3, username);
-            preparedStatement.setInt(4, countryId);
+            preparedStatement.setString(1, Contact_Name);
+            preparedStatement.setString(2, Email);
+            preparedStatement.setInt(3,Contact_ID);
 
             // execute query
             count = preparedStatement.executeUpdate();
