@@ -6,7 +6,7 @@ CREATE USER scheduleruser IDENTIFIED BY 'freddy!@';
 
 
 SET FOREIGN_KEY_CHECKS = 0;
-drop table apppintments;
+drop table appointments;
 drop table contacts;
 drop table users;
 drop table customers;

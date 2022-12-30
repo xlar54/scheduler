@@ -14,10 +14,6 @@ import com.scheduler.dao.*;
 public class App extends Application {
 
 
-    static final String DB_URL = "jdbc:mysql://localhost:3306/scheduler";
-    static final String USER = "scheduleruser";
-    static final String PASS = "freddy!@";
-    static final String QUERY = "desc appointments";
     public void start(Stage stage) throws IOException
     {
 
@@ -33,16 +29,6 @@ public class App extends Application {
             stage.setTitle("demande de calendrier");
         }
         stage.show();
-        //connection to database
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(QUERY);) {
-
-             System.out.println("connection successful");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println(System.getProperty("user.language"));
 
     }
 
@@ -50,12 +36,32 @@ public class App extends Application {
 
         public static void main (String[]args) throws Exception {
 
+            nickstestcode();
+            dadstestcode();
+            launch();
+        }
+
+        public static void dadstestcode() {
+
+            // this is just a temp function to test code.  delete when done
+
+            //CountryDAO countryDAO = new CountryDAO();
+            //countryDAO.insert("Spain", "scott");
 
             /*Countries country = new Countries();
             CountryDAO countryDAO = new CountryDAO();
             country = countryDAO.getCountry(1);
 
             System.out.println(country.getCountry());*/
-            launch();
+
+            FileLogger f = new FileLogger();
+            f.info("hello");
+
         }
+
+    public static void nickstestcode() {
+
+        // this is just a temp function to test code.  delete when done
+
     }
+}
