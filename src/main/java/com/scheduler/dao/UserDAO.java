@@ -62,6 +62,57 @@ public class UserDAO {
         }
     }
 
+    public User getUserByUsernamePassword(String userName, String password) throws Exception {
+        User user = null;
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(
+                    "select User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By " +
+                            "from Users where User_Name=? and Password=?");
+
+            // setting the SQL parameters (one for each ?)
+            preparedStatement.setString(1, userName);
+            preparedStatement.setString(2, password);
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next() ) {
+
+                user = new User();
+
+                user.setUser_ID(resultSet.getInt(1));
+                user.setUser_name(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setCreate_date(resultSet.getDate(4));
+                user.setCreated_by(resultSet.getString(5));
+                user.setLast_update(resultSet.getDate(6));
+                user.setLast_updated_by(resultSet.getString(7));
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return user;
+        }
+    }
 
     public int insert(String userName, String password, String username) throws Exception {
 

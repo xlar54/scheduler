@@ -26,6 +26,8 @@ import javafx.scene.control.TableView;
 
 import javafx.util.Callback;
 
+import com.scheduler.pojo.*;
+import com.scheduler.dao.UserDAO;
 
 public class PrimaryController {
     @FXML
@@ -157,14 +159,16 @@ public class PrimaryController {
     }
 
     @FXML 
-    void signInHandler(ActionEvent event) throws IOException {
+    void signInHandler(ActionEvent event) throws Exception {
 
         String enteredUsername = userNameField.getText();
         String enteredPassword = passwordField.getText();
-        final String actualUsername = "nicholas";
-        final String actualPassword ="Freddy12!@";
 
-        if (enteredUsername.equals(actualUsername) && enteredPassword.equals(actualPassword) && french)
+        User user = new User();
+        UserDAO userDAO = new UserDAO();
+        user = userDAO.getUserByUsernamePassword(enteredUsername, enteredPassword);
+
+        if (user != null && french)
         {
 
             Alert a = new Alert(AlertType.CONFIRMATION);
@@ -172,10 +176,12 @@ public class PrimaryController {
             String name = obj.getID();
             zoneID.setText(name);
             a.setContentText("connexion réussie");
+            Translation trans = new Translation();
+            String text = trans.getText(Translation.Language.FRENCH, Translation.LanguageKey.LOGIN_FORM_HEADER);
             a.showAndWait();
 
         }
-        else if (enteredUsername.equals(actualUsername) && enteredPassword.equals(actualPassword))
+        else if (user != null)
         {
 
             Alert a = new Alert(AlertType.CONFIRMATION);
