@@ -1,7 +1,5 @@
 package com.scheduler.app;
 
-import java.sql.*;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -41,7 +39,7 @@ public class App extends Application {
             launch();
         }
 
-        public static void dadstestcode() {
+        public static void dadstestcode() throws Exception {
 
             // this is just a temp function to test code.  delete when done
 
@@ -54,9 +52,12 @@ public class App extends Application {
 
             System.out.println(country.getCountry());*/
 
-            FileLogger f = new FileLogger();
+            FileLogger f = FileLogger.getInstance();
             f.info("hello");
 
+            //CustomerDAO customerDAO = new CustomerDAO();
+            //int count = customerDAO.update(3,"Mike Wilson", "776 Noola Ave", "88756", "666-775-7645", 2, "scott");
+            //System.out.println(count);
         }
 
     public static void nickstestcode() {

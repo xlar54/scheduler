@@ -46,10 +46,7 @@ public class CustomerDAO {
             }
 
         } catch (Exception e) {
-
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
-
         } finally {
 
             // close everything
@@ -73,7 +70,7 @@ public class CustomerDAO {
 
         int count = 0;
         final String sql = "insert into Customers " +
-                "(Customer_Name, Address, Postal_Code, Phone, Created_Date, Created_By, Last_Update," +
+                "(Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update," +
                 "Last_Updated_By, Division_ID)" +
                 "values (?,?,?,?,?,?,?,?,?)";
 
@@ -104,7 +101,6 @@ public class CustomerDAO {
 
         } catch (Exception e) {
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
         } finally {
 
             // close everything
@@ -122,13 +118,13 @@ public class CustomerDAO {
         }
     }
 
-    public int update(String customerName, String address, String postalCode, String phone, int divisionId,
+    public int update(int ID, String customerName, String address, String postalCode, String phone, int divisionId,
                       String username) throws Exception {
 
         int count = 0;
         final String sql = "update Customers " +
-                "set Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Last_Update=?" +
-                "Last_Updated_By=?, Division_ID=?" +
+                "set Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Last_Update=?," +
+                "Last_Updated_By=?, Division_ID=? " +
                 "where Customer_ID=?";
 
         try {
@@ -143,23 +139,20 @@ public class CustomerDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            // setting the SQL parameters (one for each ?)
             preparedStatement.setString(1, customerName);
             preparedStatement.setString(2, address);
             preparedStatement.setString(3, postalCode);
             preparedStatement.setString(4, phone);
             preparedStatement.setTimestamp(5, timestamp);
             preparedStatement.setString(6, username);
-            preparedStatement.setInt(9, divisionId);
+            preparedStatement.setInt(7, divisionId);
+            preparedStatement.setInt(8, ID);
 
             // execute query
             count = preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
-
         } finally {
 
             // close everything
@@ -177,7 +170,7 @@ public class CustomerDAO {
         }
     }
 
-    public int delete(int customerId) throws Exception {
+    public int delete(int ID) throws Exception {
 
         int count = 0;
         final String sql = "delete from Customers where Customer_ID=?";
@@ -194,16 +187,13 @@ public class CustomerDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, ID);
 
             // execute query
             count = preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
-
         } finally {
 
             // close everything

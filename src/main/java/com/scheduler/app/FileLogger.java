@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -20,6 +21,8 @@ public class FileLogger {
     {
         if (single_instance == null)
             single_instance = new FileLogger();
+
+        single_instance.initialize();
 
         return single_instance;
     }
@@ -38,9 +41,6 @@ public class FileLogger {
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
 
-            // the following statement is used to log any messages
-            logger.info( "File logging started.");
-
         } catch (SecurityException e) {
             e.printStackTrace();
         }
@@ -48,13 +48,22 @@ public class FileLogger {
 
     public void info(String message) {
         logger.info(message);
+
+        for(Handler h:logger.getHandlers())
+            h.close();
     }
 
     public void warning(String message) {
         logger.warning(message);
+
+        for(Handler h:logger.getHandlers())
+            h.close();
     }
 
     public void severe(String message) {
         logger.severe(message);
+
+        for(Handler h:logger.getHandlers())
+            h.close();
     }
 }

@@ -39,7 +39,6 @@ public class CountryDAO {
 
         } catch (Exception e) {
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
         } finally {
 
             // close everything
@@ -87,7 +86,6 @@ public class CountryDAO {
 
         } catch (Exception e) {
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
         } finally {
 
             // close everything
@@ -133,10 +131,7 @@ public class CountryDAO {
             count = preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-
             FileLogger.getInstance().warning(e.getMessage());
-            throw e;
-
         } finally {
 
             // close everything
