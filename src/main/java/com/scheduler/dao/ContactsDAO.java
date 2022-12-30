@@ -58,7 +58,7 @@ public class ContactsDAO {
         }
     }
 
-    public int insert(String country, String username) throws Exception {
+    public int insert(String contact, String username) throws Exception {
 
         int count = 0;
         final String sql = "insert into Contacts" +
