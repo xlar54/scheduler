@@ -64,7 +64,7 @@ public class App extends Application {
     public static void nickstestcode() throws Exception {
 
         ContactsDAO contactsDAO = new ContactsDAO();
-        contactsDAO.update(3, "nickybae", "email.address@.com");
+        contactsDAO.delete(3);
 
     }
 }

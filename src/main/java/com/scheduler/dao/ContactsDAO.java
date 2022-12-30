@@ -147,5 +147,45 @@ public class ContactsDAO {
             return count;
         }
     }
+    public int delete(int ID) throws Exception {
+
+        int count = 0;
+        final String sql = "delete from Contacts where Contact_ID=?";
+
+        try {
+
+            Calendar cal = Calendar.getInstance();
+            Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(sql);
+
+            // setting the SQL parameters (one for each ?)
+            preparedStatement.setInt(1, ID);
+
+            // execute query
+            count = preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return count;
+        }
+    }
 }
 
