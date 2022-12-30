@@ -1,6 +1,8 @@
 package com.scheduler.dao;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.scheduler.app.Config;
 import com.scheduler.pojo.Customer;
@@ -12,6 +14,62 @@ public class CustomerDAO {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+
+    public ArrayList<Customer> getCustomerList() throws Exception {
+
+        ArrayList<Customer> customerList = new ArrayList<>();
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(
+                    "select Customer_ID, Customer_Name, Address, Postal_Code,"+
+                            "Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID" +
+                            "from Customer");
+
+            // setting the SQL parameters (one for each ?)
+            //preparedStatement.setString(1, String.valueOf(ID));
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                Customer customer = new Customer();
+                customer.setCustomer_name(resultSet.getString(2));
+                customer.setAddress(resultSet.getString(3));
+                customer.setPostal_code(resultSet.getString(4));
+                customer.setPhone(resultSet.getString(5));
+                customer.setCreated_by(resultSet.getString(6));
+                customer.setLast_update(resultSet.getDate(8));
+                customer.setLast_updated_by(resultSet.getString(9));
+                customer.setDivision_id(resultSet.getInt(10));
+
+                customerList.add(customer);
+
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return customerList;
+        }
+    }
 
     public Customer getCustomerByID(int ID) throws Exception {
         Customer customer = new Customer();
