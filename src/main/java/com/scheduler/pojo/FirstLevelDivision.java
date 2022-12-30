@@ -1,6 +1,6 @@
 package com.scheduler.pojo;
 
-public class FirstLevelDivisions{
+public class FirstLevelDivision {
 	private String Division;
 	private String Created_By;
 	private java.util.Date Last_Update;

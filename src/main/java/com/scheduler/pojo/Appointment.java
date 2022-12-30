@@ -1,6 +1,6 @@
 package com.scheduler.pojo;
 
-public class Appointments{
+public class Appointment {
     private String Title;
 private String Description;
 private String Location;

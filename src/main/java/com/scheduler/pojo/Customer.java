@@ -1,6 +1,6 @@
 package com.scheduler.pojo;
 
-public class Customers{
+public class Customer {
 private String Customer_Name;
 private String Address;
 private String Postal_Code;

@@ -1,6 +1,6 @@
 package com.scheduler.pojo;
 
-public class Contacts{
+public class Contact {
 private String Contact_Name;
 private String Email;
 

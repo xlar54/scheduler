@@ -16,7 +16,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 create table countries (
-	Country_ID int(10) NOT NULL,
+	Country_ID int(10) NOT NULL AUTO_INCREMENT,
     Country varchar(50),
     Create_Date datetime,
     Created_By varchar(50),
@@ -26,7 +26,7 @@ create table countries (
 );
 
 create table firstlevel_divisions (
-	Division_ID int(10),
+	Division_ID int(10) NOT NULL AUTO_INCREMENT,
     Division varchar(50),
     Create_Date datetime,
     Created_By varchar(50),
@@ -40,7 +40,7 @@ create table firstlevel_divisions (
 );
 
 create table customers (
-	Customer_ID int(10),
+	Customer_ID int(10)  NOT NULL AUTO_INCREMENT,
     Customer_Name varchar(50),
     Address varchar(100),
     Postal_Code varchar(50),
@@ -57,7 +57,7 @@ create table customers (
 );
 
 create table users (
-	User_ID int(10),
+	User_ID int(10) NOT NULL AUTO_INCREMENT,
     User_Name varchar(50) UNIQUE,
     password text,
 	Create_Date datetime,
@@ -68,14 +68,14 @@ create table users (
 );
 
 create table contacts (
-	Contact_ID int(10),
+	Contact_ID int(10) NOT NULL AUTO_INCREMENT,
     Contact_Name varchar(50),
     Email varchar(50),
     PRIMARY KEY (Contact_ID)
 );
 
 create table appointments (
-	Appointment_ID int(10),
+	Appointment_ID int(10) NOT NULL AUTO_INCREMENT,
     Title varchar(50),
     Description varchar(50),
     Location varchar(50),

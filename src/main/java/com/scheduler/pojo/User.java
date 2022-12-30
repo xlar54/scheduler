@@ -1,17 +1,17 @@
 package com.scheduler.pojo;
 
-public class Countries{
-private String Country;
+public class User {
+private String User_Name;
 private String Created_By;
 private java.util.Date Last_Update;
 private String Last_Updated_By;
 
-public String getCountry(){
-        return Country;
+public String getUser_name(){
+        return User_Name;
         }
 
-public void setCountry(String Country){
-        this.Country=Country;
+public void setUser_name(String User_Name){
+        this.User_Name=User_Name;
         }
 
 public String getCreated_by(){
