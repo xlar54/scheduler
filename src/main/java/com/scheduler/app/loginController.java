@@ -165,6 +165,8 @@ public class loginController implements Initializable {
 
         if (user != null)
         {
+            // establish global logged in user
+            App.loggedInUser = user;
 
             Alert a = new Alert(AlertType.CONFIRMATION);
             TimeZone obj = TimeZone.getDefault();
@@ -192,7 +194,7 @@ public class loginController implements Initializable {
         Stage stage = (Stage) signInButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/customerEdit.fxml"));
         //Scene scene = new Scene(fxmlLoader.load(), 500, 640);
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 550);
         stage.setTitle("Schedule Application");
 
         // center on screen

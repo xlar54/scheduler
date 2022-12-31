@@ -51,4 +51,9 @@ public class Country{
         public void setLast_updated_by(String Last_Updated_By){
                 this.Last_Updated_By=Last_Updated_By;
         }
+
+        @Override
+        public String toString() {
+                return this.getCountry();
+        }
 }

@@ -2,6 +2,7 @@ package com.scheduler.app;
 
 import com.scheduler.dao.FirstLevelDivisionDAO;
 import com.scheduler.pojo.FirstLevelDivision;
+import com.scheduler.pojo.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import java.io.IOException;
 
 public class App extends Application {
 
+    public static User loggedInUser = null;
 
     public static void main (String[]args) throws Exception {
 

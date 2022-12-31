@@ -3,6 +3,8 @@ package com.scheduler.dao;
 import com.scheduler.app.Config;
 import com.scheduler.app.FileLogger;
 import com.scheduler.pojo.FirstLevelDivision;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -14,7 +16,6 @@ public class FirstLevelDivisionDAO {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-
 
     public FirstLevelDivision getByID(int ID) throws Exception {
         FirstLevelDivision firstLevelDivision = null;
@@ -65,9 +66,9 @@ public class FirstLevelDivisionDAO {
         }
     }
 
-    public ArrayList<FirstLevelDivision> getByCountryName(String countryName) throws Exception {
+    public ObservableList<FirstLevelDivision> getByCountryName(String countryName) throws Exception {
 
-        ArrayList<FirstLevelDivision> fldList = new ArrayList<>();
+        ObservableList<FirstLevelDivision> fldList = FXCollections.observableArrayList();
 
         final String sql = "select fld.Division_ID, fld.Division, fld.Create_Date, fld.Created_By, fld.Last_Update, " +
                 "fld.last_Updated_By, " +
