@@ -1,6 +1,7 @@
 package com.scheduler.pojo;
 
 public class Customer {
+        private int Customer_ID;
 private String Customer_Name;
 private String Address;
 private String Postal_Code;
@@ -9,6 +10,10 @@ private String Created_By;
 private java.util.Date Last_Update;
 private String Last_Updated_By;
 private int Division_ID;
+
+public int getCustomer_ID() { return this.Customer_ID; }
+
+        public void setCustomer_ID(int ID) {this.Customer_ID = ID; }
 
 public String getCustomer_name(){
         return Customer_Name;
