@@ -152,19 +152,20 @@ public class AppointmentsDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setString(1, Title);
-            preparedStatement.setString(2, Description);
-            preparedStatement.setString(3,Location);
-            preparedStatement.setString(4, Type);
-            preparedStatement.setDate(5,date);
+            preparedStatement.setInt(1,Appointment_ID );
+            preparedStatement.setString(2, Title);
+            preparedStatement.setString(3, Description);
+            preparedStatement.setString(4,Location);
+            preparedStatement.setString(5, Type);
             preparedStatement.setDate(6,date);
-            preparedStatement.setString(7, Created_By);
-            preparedStatement.setTimestamp(8, timestamp);
-            preparedStatement.setString(9,Last_Updated_By);
-            preparedStatement.setInt(10, Customer_ID);
-            preparedStatement.setInt(11,user_ID);
-            preparedStatement.setInt(12,Contact_ID );
-            preparedStatement.setInt(13,appointment.getAppointment_ID() );
+            preparedStatement.setDate(7,date);
+            preparedStatement.setString(8, Created_By);
+            preparedStatement.setTimestamp(9, timestamp);
+            preparedStatement.setString(10,Last_Updated_By);
+            preparedStatement.setInt(11, Customer_ID);
+            preparedStatement.setInt(12,user_ID);
+            preparedStatement.setInt(13,Contact_ID );
+
 
 
             // execute query

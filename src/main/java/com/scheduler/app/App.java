@@ -53,11 +53,9 @@ public class App extends Application {
         Calendar cal = Calendar.getInstance();
         Timestamp ts = new Timestamp(cal.getTimeInMillis());
         AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
-        Appointment appointment = new Appointment();
-        appointmentsDAO.update(1,"thisTitle", "myTitle","location",
+         appointmentsDAO.update(1,"thisTitle", "myTitle","location",
                 "mytype", date, date, "nicholas", ts, "nicholas", 1, 1, 1);
 
-        //need to figure out why apppointmentsDAO.update returns null values
 
     }
 }
