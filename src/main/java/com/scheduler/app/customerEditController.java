@@ -9,6 +9,8 @@ import com.scheduler.pojo.FirstLevelDivision;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,8 +25,9 @@ import java.util.ResourceBundle;
 
 
 public class customerEditController implements Initializable {
-    public ComboBox cboDivision;
-    public ComboBox cboCountry;
+
+    public ComboBox<FirstLevelDivision> cboDivision;
+    public ComboBox<Country> cboCountry;
     public TextField txtCustomerName;
     public Label lblCustomerID;
     public TextField txtAddress;
@@ -32,15 +35,73 @@ public class customerEditController implements Initializable {
     public TextField txtPhoneNumber;
     public Button btnSave;
     public Button btnDelete;
+    public Button btnNew;
     public Label lblMessage;
+
+    int countryId, divisionId = 0;
     @FXML
     private TableView<CustomerRow> customersTableView;
 
+    ChangeListener<Country> countryComboBoxChangeListener;
+    ChangeListener<FirstLevelDivision> divisionComboBoxChangeListener;
+
 
     @Override
-        public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {
+
+        lblMessage.setText("");
 
         initTableView();
+
+        btnSave.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    saveCustomer();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        btnDelete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    deleteCustomer();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        btnNew.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    clearFormData();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        divisionComboBoxChangeListener = new ChangeListener<FirstLevelDivision>() {
+            @Override
+            public void changed(ObservableValue<? extends FirstLevelDivision> observable, FirstLevelDivision oldValue, FirstLevelDivision newValue) {
+                FirstLevelDivision firstLevelDivision = (FirstLevelDivision) cboDivision.getSelectionModel().getSelectedItem();
+
+                if(firstLevelDivision != null) {
+                    try {
+                        divisionId = firstLevelDivision.getDivision_ID();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        };
+
+        cboDivision.valueProperty().addListener(divisionComboBoxChangeListener);
 
         try {
             initCountryComboBox();
@@ -55,7 +116,7 @@ public class customerEditController implements Initializable {
         }
 
     }
-    @SuppressWarnings("unchecked")
+
     private void initTableView() {
 
         TableColumn<CustomerRow, Integer> customerIDCol       = new TableColumn<CustomerRow, Integer>("ID");
@@ -73,8 +134,14 @@ public class customerEditController implements Initializable {
         TableColumn<CustomerRow, String> customerPhoneCol    = new TableColumn<CustomerRow, String>("Phone");
         customerPhoneCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Phone"));
 
+        TableColumn<CustomerRow, Integer> customerDivisionIDCol = new TableColumn<CustomerRow, Integer>("Division ID");
+        customerDivisionIDCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,Integer>("Division_ID"));
+
         TableColumn<CustomerRow, String> customerDivisionCol    = new TableColumn<CustomerRow, String>("Division");
         customerDivisionCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Division"));
+
+        TableColumn<CustomerRow, Integer> customerCountryIDCol = new TableColumn<CustomerRow, Integer>("Country ID");
+        customerCountryIDCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,Integer>("CountryID"));
 
         TableColumn<CustomerRow, String> customerCountryCol    = new TableColumn<CustomerRow, String>("Country");
         customerCountryCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Country"));
@@ -84,7 +151,11 @@ public class customerEditController implements Initializable {
 
         // Here is a lambda method as requested on document
         customersTableView.setOnMouseClicked((MouseEvent event) -> {
-            onCustomerTableViewSelectedRow();
+            try {
+                onCustomerTableViewSelectedRow();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
@@ -95,34 +166,37 @@ public class customerEditController implements Initializable {
         cboCountry.getItems().clear();
 
         CountryDAO countryDAO = new CountryDAO();
-        ArrayList<Country> countries = countryDAO.getAll();
+        ObservableList<Country> countries = countryDAO.getAll();
+        cboCountry.setItems(countries);
 
-        for (Country country : countries) cboCountry.getItems().add(country.getCountry());
+        if(countryComboBoxChangeListener != null)
+            cboCountry.valueProperty().removeListener(countryComboBoxChangeListener);
 
-        // create handler for change to country combobox
-        cboCountry.valueProperty().addListener(new ChangeListener<String>() {
+        this.countryComboBoxChangeListener = new ChangeListener<Country>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                String selectedCountry = (String) cboCountry.getValue();
+            public void changed(ObservableValue<? extends Country> observable, Country oldValue, Country newValue) {
+                Country selectedCountry = (Country) cboCountry.getSelectionModel().getSelectedItem();
+
                 try {
-                    onCountryComboBoxChange(selectedCountry);
+                    // loads the divisions when the country combobox is changed
+                    cboDivision.getItems().clear();
+
+                    if(selectedCountry != null) {
+                        FirstLevelDivisionDAO fldDAO = new FirstLevelDivisionDAO();
+                        ObservableList<FirstLevelDivision> flds = fldDAO.getByCountryName(selectedCountry.getCountry());
+
+                        cboDivision.setItems(flds);
+                        cboDivision.valueProperty().set(null);
+                        divisionId=0;
+                    }
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
-        });
-    }
+        };
 
-    private void onCountryComboBoxChange(String selectedCountry) throws Exception {
-
-        // loads the divisions when the country combobox is changed
-        cboDivision.getItems().clear();
-
-        FirstLevelDivisionDAO fldDAO = new FirstLevelDivisionDAO();
-        ArrayList<FirstLevelDivision> flds = fldDAO.getByCountryName(selectedCountry);
-
-        for (FirstLevelDivision fld : flds) cboDivision.getItems().add(fld.getDivision());
-
+        cboCountry.valueProperty().addListener(countryComboBoxChangeListener);
     }
 
     private void refreshTableViewData() throws Exception {
@@ -136,7 +210,7 @@ public class customerEditController implements Initializable {
 
     }
 
-    public void onCustomerTableViewSelectedRow() {
+    public void onCustomerTableViewSelectedRow() throws Exception {
 
         if (customersTableView.getSelectionModel().getSelectedItem() != null) {
 
@@ -151,8 +225,101 @@ public class customerEditController implements Initializable {
             txtPostalCode.setText(selectedRow.getPostal_code());
 
             // set the comboboxes
-            cboCountry.setValue((String)selectedRow.getCountry());
-            cboDivision.setValue((String)selectedRow.getDivision());
+            countryId = selectedRow.getCountryID();
+            CountryDAO countryDAO = new CountryDAO();
+            Country country = countryDAO.getByID(countryId);
+            cboCountry.setValue(country);
+
+            divisionId = selectedRow.getDivisionID();
+            FirstLevelDivisionDAO flddao = new FirstLevelDivisionDAO();
+            FirstLevelDivision fld = flddao.getByID(divisionId);
+            cboDivision.setValue(fld);
         }
+    }
+
+    void clearFormData() throws Exception {
+
+        lblCustomerID.setText("New");
+        txtCustomerName.setText("");
+        txtAddress.setText("");
+        txtPostalCode.setText("");
+        txtPhoneNumber.setText("");
+
+        initCountryComboBox();
+        cboDivision.getItems().clear();
+        cboDivision.valueProperty().set(null);
+
+        divisionId = 0;
+        countryId = 0;
+
+    }
+    void saveCustomer() throws Exception {
+
+        if (validateInput() == false)
+            return;
+
+        CustomerDAO customerDAO = new CustomerDAO();
+
+        if(lblCustomerID.getText().equals("New")) {
+            // this is an insert
+            customerDAO.insert(txtCustomerName.getText(), txtAddress.getText(),
+                    txtPostalCode.getText(), txtPhoneNumber.getText(), divisionId, App.loggedInUser.getUser_name());
+        }
+        else {
+            // this is an update
+            customerDAO.update(Integer.parseInt(lblCustomerID.getText()),txtCustomerName.getText(), txtAddress.getText(),
+                    txtPostalCode.getText(), txtPhoneNumber.getText(), divisionId, App.loggedInUser.getUser_name());
+        }
+        refreshTableViewData();
+        clearFormData();
+    }
+
+    void deleteCustomer() throws Exception {
+
+        if (!lblCustomerID.getText().equals("New")) {
+
+            CustomerDAO customerDAO = new CustomerDAO();
+            int count = customerDAO.delete(Integer.parseInt(lblCustomerID.getText()));
+
+            if(count == 1)
+                lblMessage.setText("Customer record deleted");
+
+            refreshTableViewData();
+            clearFormData();
+
+            //TODO: delete appointments as well for this customer
+        }
+    }
+
+    boolean validateInput() {
+
+        if(txtCustomerName.getText().equals("")) {
+            lblMessage.setText("Error: Customer Name is required.");
+            return false;
+        }
+
+        if(txtAddress.getText().equals("")) {
+            lblMessage.setText("Error: Address is required.");
+            return false;
+        }
+
+        if(txtPhoneNumber.getText().equals("")) {
+            lblMessage.setText("Error: Phone number is required.");
+            return false;
+        }
+
+        if(txtPostalCode.getText().equals("")) {
+            lblMessage.setText("Error: Postal code is required.");
+            return false;
+        }
+
+        if(divisionId == 0) {
+            lblMessage.setText("Error: Country/Division is required.");
+            return false;
+        }
+
+        lblMessage.setText("");
+        return true;
+
     }
 }

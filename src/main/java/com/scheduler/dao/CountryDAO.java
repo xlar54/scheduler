@@ -7,6 +7,8 @@ import java.util.Calendar;
 import com.scheduler.app.Config;
 import com.scheduler.pojo.*;
 import com.scheduler.app.FileLogger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class CountryDAO {
@@ -15,9 +17,9 @@ public class CountryDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    public ArrayList<Country> getAll() throws Exception {
+    public ObservableList<Country> getAll() throws Exception {
 
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ObservableList<Country> countries = FXCollections.observableArrayList();
 
         final String sql = "select Country_ID, Country, Create_Date, Created_By," +
                 "Last_Update, Last_Updated_By from Countries";

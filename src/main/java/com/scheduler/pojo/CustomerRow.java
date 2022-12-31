@@ -7,8 +7,11 @@ public class CustomerRow {
     private String Address;
     private String Postal_Code;
     private String Phone;
+    private int Division_ID;
     private String Division;
+    private int Country_ID;
     private String Country;
+
 
     public int getCustomer_ID() { return this.Customer_ID; }
 
@@ -46,15 +49,27 @@ public class CustomerRow {
         this.Phone=Phone;
     }
 
+    public int getDivisionID(){ return Division_ID;}
+
+    public void setDivisionID(Integer DivisionID){
+        this.Division_ID=DivisionID;
+    }
+
     public String getDivision(){ return Division;}
 
     public void setDivision(String Division){
         this.Division=Division;
     }
+    public int getCountryID(){ return Country_ID;}
 
+    public void setCountryID(int CountryID){
+
+        Country_ID=CountryID;
+    }
     public String getCountry(){ return Country;}
 
     public void setCountry(String Country){
         this.Country=Country;
     }
+
 }
