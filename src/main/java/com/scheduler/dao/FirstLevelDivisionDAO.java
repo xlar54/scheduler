@@ -71,7 +71,7 @@ public class FirstLevelDivisionDAO {
         final String sql = "insert into firstlevel_divisions " +
                 "(division, create_date,created_By, last_Update,last_Updated_By, country_ID) " +
                 "values (?,?,?,?,?,?)";
-
+//
         try {
 
             Calendar cal = Calendar.getInstance();
