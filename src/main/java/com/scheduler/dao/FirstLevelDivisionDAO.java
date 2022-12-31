@@ -90,6 +90,8 @@ public class FirstLevelDivisionDAO {
             preparedStatement.setString(5,last_Updated_By);
             preparedStatement.setInt(6,countryID);
 
+            //need to make function check for previous created by timestamp to ensure accuracy
+
 
 
             // execute query
@@ -114,12 +116,17 @@ public class FirstLevelDivisionDAO {
         }
     }
 
-    public int update(int Contact_ID, String Contact_Name, String Email) throws Exception {
+    public int update(int division_ID, String division, String created_by, String last_Updated_By, int countryID ) throws Exception {
 
         int count = 0;
-        final String sql = "update Contacts " +
-                "set Contact_Name=?, Email=?"+
-                "where Contact_ID=?";
+        FirstLevelDivisionDAO firstLevelDivisionDAO= new FirstLevelDivisionDAO();
+        FirstLevelDivision firstLevelDivision = new FirstLevelDivision();
+        firstLevelDivision = getByID(division_ID);
+        division_ID = firstLevelDivision.getDivision_ID();
+        final String sql = "update firstlevel_divisions set division=?,created_By=?, last_Update=?,last_Updated_By=?, country_ID=? where division_ID=? ";
+
+
+
 
         try {
 
@@ -133,9 +140,12 @@ public class FirstLevelDivisionDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setString(1, Contact_Name);
-            preparedStatement.setString(2, Email);
-            preparedStatement.setInt(3,Contact_ID);
+            preparedStatement.setString(1, division);
+            preparedStatement.setString(2, created_by);
+            preparedStatement.setTimestamp(3,timestamp);
+            preparedStatement.setString(4, last_Updated_By);
+            preparedStatement.setInt(5,countryID);
+            preparedStatement.setInt(6,division_ID);
 
             // execute query
             count = preparedStatement.executeUpdate();

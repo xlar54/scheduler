@@ -40,9 +40,13 @@ public class App extends Application {
 
         }
 
-    public static void nickstestcode() {
+    public static void nickstestcode() throws Exception{
 
         // this is just a temp function to test code.  delete when done
+        FirstLevelDivisionDAO firstLevelDivisionDAO = new FirstLevelDivisionDAO();
+        FirstLevelDivision firstLevelDivision = new FirstLevelDivision();
+        firstLevelDivisionDAO.update(1, "Western United States",
+                "nicholas hutter", "scottyboy", 2);
 
     }
 }
