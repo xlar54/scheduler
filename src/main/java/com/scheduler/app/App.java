@@ -1,6 +1,8 @@
 package com.scheduler.app;
 
+import com.scheduler.dao.AppointmentsDAO;
 import com.scheduler.dao.FirstLevelDivisionDAO;
+import com.scheduler.pojo.Appointment;
 import com.scheduler.pojo.FirstLevelDivision;
 import com.scheduler.pojo.User;
 import javafx.application.Application;
@@ -8,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.*;
+import java.util.Calendar;
 
 public class App extends Application {
 
@@ -44,11 +48,16 @@ public class App extends Application {
 
     public static void nickstestcode() throws Exception{
 
-        // this is just a temp function to test code.  delete when done
-        FirstLevelDivisionDAO firstLevelDivisionDAO = new FirstLevelDivisionDAO();
-        FirstLevelDivision firstLevelDivision = new FirstLevelDivision();
-        firstLevelDivisionDAO.update(1, "Western United States",
-                "nicholas hutter", "scottyboy", 2);
+        // this is just a temp function to test code.  delete when done'
+        Date date = null;
+        Calendar cal = Calendar.getInstance();
+        Timestamp ts = new Timestamp(cal.getTimeInMillis());
+        AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
+        Appointment appointment = new Appointment();
+        appointmentsDAO.update(1,"thisTitle", "myTitle","location",
+                "mytype", date, date, "nicholas", ts, "nicholas", 1, 1, 1);
+
+        //need to figure out why apppointmentsDAO.update returns null values
 
     }
 }

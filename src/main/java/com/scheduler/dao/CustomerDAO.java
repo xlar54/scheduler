@@ -163,7 +163,7 @@ public class CustomerDAO {
                 customer.setPostal_code(resultSet.getString(4));
                 customer.setPhone(resultSet.getString(5));
                 customer.setCreated_by(resultSet.getString(6));
-                customer.setLast_update(resultSet.getDate(8));
+                customer.setLast_update(resultSet.getTimestamp(8));
                 customer.setLast_updated_by(resultSet.getString(9));
                 customer.setDivision_id(resultSet.getInt(10));
 
