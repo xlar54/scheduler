@@ -1,7 +1,7 @@
 package com.scheduler.app;
 
 import com.scheduler.dao.CustomerDAO;
-import com.scheduler.pojo.Customer;
+import com.scheduler.pojo.CustomerRow;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,30 +26,37 @@ public class customerEditController implements Initializable {
     public Button btnDelete;
     public Label lblMessage;
     @FXML
-    private TableView<Customer> customersTableView;
+    private TableView<CustomerRow> customersTableView;
 
 
     @Override
     @SuppressWarnings("unchecked")
     public void initialize(URL location, ResourceBundle resources) {
 
-        TableColumn<Customer, Integer> customerIDCol       = new TableColumn<Customer, Integer>("ID");
-        customerIDCol.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("Customer_ID"));
+        TableColumn<CustomerRow, Integer> customerIDCol       = new TableColumn<CustomerRow, Integer>("ID");
+        customerIDCol.setCellValueFactory(new PropertyValueFactory<CustomerRow, Integer>("Customer_ID"));
 
-        TableColumn<Customer, String> customerNameCol     = new TableColumn<Customer, String>("Name");
-        customerNameCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("Customer_name"));
+        TableColumn<CustomerRow, String> customerNameCol     = new TableColumn<CustomerRow, String>("Name");
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Customer_name"));
 
-        TableColumn<Customer, String> customerAddressCol  = new TableColumn<>("Address");
-        customerAddressCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("Address"));
+        TableColumn<CustomerRow, String> customerAddressCol  = new TableColumn<>("Address");
+        customerAddressCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Address"));
 
-        TableColumn<Customer, String> customerPostalCol   = new TableColumn<>("Postal Code");
-        customerPostalCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("Postal_code"));
+        TableColumn<CustomerRow, String> customerPostalCol   = new TableColumn<>("Postal Code");
+        customerPostalCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Postal_code"));
 
-        TableColumn<Customer, String> customerPhoneCol    = new TableColumn<Customer, String>("Phone");
-        customerPhoneCol.setCellValueFactory(new PropertyValueFactory<Customer,String>("Phone"));
+        TableColumn<CustomerRow, String> customerPhoneCol    = new TableColumn<CustomerRow, String>("Phone");
+        customerPhoneCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Phone"));
+
+        TableColumn<CustomerRow, String> customerDivisionCol    = new TableColumn<CustomerRow, String>("Division");
+        customerDivisionCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Division"));
+
+        TableColumn<CustomerRow, String> customerCountryCol    = new TableColumn<CustomerRow, String>("Country");
+        customerCountryCol.setCellValueFactory(new PropertyValueFactory<CustomerRow,String>("Country"));
+
 
         customersTableView.getColumns().addAll(customerIDCol,customerNameCol,customerAddressCol,
-                customerPostalCol, customerPhoneCol);
+                customerPostalCol, customerPhoneCol, customerDivisionCol, customerCountryCol);
 
         try {
             refreshTableViewData();
@@ -62,7 +69,7 @@ public class customerEditController implements Initializable {
     private void refreshTableViewData() throws Exception {
 
         CustomerDAO customerDAO = new CustomerDAO();
-        ObservableList<Customer> customers = customerDAO.getCustomerList();
+        ObservableList<CustomerRow> customers = customerDAO.getCustomerRows();
 
         customersTableView.getItems().addAll(customers);
 

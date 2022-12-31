@@ -7,6 +7,7 @@ import java.util.List;
 import com.scheduler.app.Config;
 import com.scheduler.pojo.Customer;
 import com.scheduler.app.FileLogger;
+import com.scheduler.pojo.CustomerRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -71,6 +72,64 @@ public class CustomerDAO {
 
             // return the dataset or value (or nothing)
             return customerList;
+        }
+    }
+
+    public ObservableList<CustomerRow> getCustomerRows() throws Exception {
+
+        ObservableList<CustomerRow> customerRows = FXCollections.observableArrayList();
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(
+                    "select c.Customer_ID, c.Customer_Name, c.Address, c.Postal_Code, c.Phone, fld.Division, co.Country " +
+                            "from Customers c " +
+                            "inner join firstlevel_divisions fld " +
+                            "on c.Division_ID = fld.Division_ID " +
+                            "inner join countries co " +
+                            "on fld.Country_ID = co.Country_ID");
+
+            // setting the SQL parameters (one for each ?)
+            //preparedStatement.setString(1, String.valueOf(ID));
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                CustomerRow customerRow = new CustomerRow();
+                customerRow.setCustomer_ID(resultSet.getInt(1));
+                customerRow.setCustomer_name(resultSet.getString(2));
+                customerRow.setAddress(resultSet.getString(3));
+                customerRow.setPostal_code(resultSet.getString(4));
+                customerRow.setPhone(resultSet.getString(5));
+                customerRow.setDivision(resultSet.getString(6));
+                customerRow.setCountry(resultSet.getString(7));
+
+                customerRows.add(customerRow);
+
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return customerRows;
         }
     }
 

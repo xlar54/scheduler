@@ -111,10 +111,10 @@ insert into countries (Country_ID, Country, Create_Date, Created_By, Last_Update
 values (2,'France', curdate(), 'script', current_timestamp(), 'script');
 
 insert into firstlevel_divisions (Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID)
-values (1,'North', curdate(), 'script', current_timestamp(), 'script', 1);
+values (1,'Alabama', curdate(), 'script', current_timestamp(), 'script', 1);
 
 insert into firstlevel_divisions (Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID)
-values (2,'South', curdate(), 'script', current_timestamp(), 'script', 1);
+values (2,'Alaska', curdate(), 'script', current_timestamp(), 'script', 1);
 
 insert into firstlevel_divisions (Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID)
 values (3,'North FR', curdate(), 'script', current_timestamp(), 'script', 2);
