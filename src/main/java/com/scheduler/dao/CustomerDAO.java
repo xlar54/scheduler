@@ -86,12 +86,14 @@ public class CustomerDAO {
 
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement(
-                    "select c.Customer_ID, c.Customer_Name, c.Address, c.Postal_Code, c.Phone, fld.Division, co.Country " +
+                    "select c.Customer_ID, c.Customer_Name, c.Address, c.Postal_Code, c.Phone, " +
+                            "c.Division_ID, fld.Division, fld.Country_ID, co.Country " +
                             "from Customers c " +
                             "inner join firstlevel_divisions fld " +
                             "on c.Division_ID = fld.Division_ID " +
                             "inner join countries co " +
-                            "on fld.Country_ID = co.Country_ID");
+                            "on fld.Country_ID = co.Country_ID " +
+                            "order by c.Customer_ID");
 
             // setting the SQL parameters (one for each ?)
             //preparedStatement.setString(1, String.valueOf(ID));
@@ -107,8 +109,10 @@ public class CustomerDAO {
                 customerRow.setAddress(resultSet.getString(3));
                 customerRow.setPostal_code(resultSet.getString(4));
                 customerRow.setPhone(resultSet.getString(5));
-                customerRow.setDivision(resultSet.getString(6));
-                customerRow.setCountry(resultSet.getString(7));
+                customerRow.setDivisionID(resultSet.getInt(6));
+                customerRow.setDivision(resultSet.getString(7));
+                customerRow.setCountryID(resultSet.getInt(8));
+                customerRow.setCountry(resultSet.getString(9));
 
                 customerRows.add(customerRow);
 
@@ -159,7 +163,7 @@ public class CustomerDAO {
                 customer.setPostal_code(resultSet.getString(4));
                 customer.setPhone(resultSet.getString(5));
                 customer.setCreated_by(resultSet.getString(6));
-                customer.setLast_update(resultSet.getDate(8));
+                customer.setLast_update(resultSet.getTimestamp(8));
                 customer.setLast_updated_by(resultSet.getString(9));
                 customer.setDivision_id(resultSet.getInt(10));
 

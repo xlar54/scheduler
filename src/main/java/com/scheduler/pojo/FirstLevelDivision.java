@@ -13,7 +13,7 @@ public class FirstLevelDivision {
 
 	public void setDivision_ID(int ID) {this.Division_ID = ID;}
 
-	public int getDivision_ID() { return this.Division_ID; }
+	public Integer getDivision_ID() { return this.Division_ID; }
 
 	public String getDivision(){
 		return Division;
@@ -58,4 +58,9 @@ public class FirstLevelDivision {
 	public void setCreate_Date(java.util.Date dateTime){this.Create_Date = dateTime;}
 
 	public java.util.Date getCreate_Date(){return Create_Date;}
+
+	@Override
+	public String toString() {
+		return this.getDivision();
+	}
 }
