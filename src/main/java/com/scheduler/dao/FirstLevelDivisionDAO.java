@@ -6,6 +6,7 @@ import com.scheduler.pojo.FirstLevelDivision;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class FirstLevelDivisionDAO {
@@ -61,6 +62,62 @@ public class FirstLevelDivisionDAO {
 
             // return the dataset or value (or nothing)
             return firstLevelDivision;
+        }
+    }
+
+    public ArrayList<FirstLevelDivision> getByCountryName(String countryName) throws Exception {
+
+        ArrayList<FirstLevelDivision> fldList = new ArrayList<>();
+
+        final String sql = "select fld.Division_ID, fld.Division, fld.Create_Date, fld.Created_By, fld.Last_Update, " +
+                "fld.last_Updated_By, " +
+                "fld.Country_ID from firstlevel_divisions fld " +
+                "inner join Countries co ON co.Country_ID = fld.Country_ID and co.Country=?";
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(sql);
+
+            // setting the SQL parameters (one for each ?)
+            preparedStatement.setString(1, String.valueOf(countryName));
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next() ) {
+                FirstLevelDivision firstLevelDivision = new FirstLevelDivision();
+
+                firstLevelDivision.setDivision_ID(resultSet.getInt(1));
+                firstLevelDivision.setDivision(resultSet.getString(2));
+                firstLevelDivision.setCreate_Date(resultSet.getDate(3));
+                firstLevelDivision.setCreated_by(resultSet.getString(4));
+                firstLevelDivision.setLast_update(resultSet.getDate(5));
+                firstLevelDivision.setLast_updated_by(resultSet.getString(6));
+                firstLevelDivision.setCountry_id(resultSet.getInt(7));
+
+                fldList.add(firstLevelDivision);
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return fldList;
         }
     }
 

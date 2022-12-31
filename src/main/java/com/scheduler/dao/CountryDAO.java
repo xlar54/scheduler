@@ -1,6 +1,7 @@
 package com.scheduler.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.scheduler.app.Config;
@@ -14,7 +15,56 @@ public class CountryDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+    public ArrayList<Country> getAll() throws Exception {
 
+        ArrayList<Country> countries = new ArrayList<Country>();
+
+        final String sql = "select Country_ID, Country, Create_Date, Created_By," +
+                "Last_Update, Last_Updated_By from Countries";
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(sql);
+
+            // setting the SQL parameters (one for each ?)
+            //preparedStatement.setString(1, String.valueOf(ID));
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Country country = new Country();
+                country.setCountry_ID(resultSet.getInt(1));
+                country.setCountry(resultSet.getString(2));
+                country.setCreate_Date(resultSet.getDate(3));
+                country.setCreated_by(resultSet.getString(4));
+                country.setLast_update(resultSet.getDate(5));
+                country.setLast_updated_by(resultSet.getString(6));
+                countries.add(country);
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return countries;
+        }
+    }
     public Country getByID(int ID) throws Exception {
         Country country = new Country();
         final String sql = "select Country from Countries where Country_ID=?";

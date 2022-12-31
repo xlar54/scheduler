@@ -8,9 +8,9 @@ public class Country{
         private java.util.Date Last_Update;
         private String Last_Updated_By;
 
-        public int getCountry_ID() {
-                return Country_ID;
-        }
+        public int getCountry_ID() { return Country_ID; }
+
+        public void setCountry_ID(int ID) { this.Country_ID = ID; }
 
         public String getCountry(){
                 return Country;
@@ -30,6 +30,10 @@ public class Country{
 
         public java.util.Date getCreate_date(){
                 return Create_Date;
+        }
+
+        public void setCreate_Date(java.util.Date Create_Date){
+                this.Create_Date = Create_Date;
         }
 
         public java.util.Date getLast_update(){
