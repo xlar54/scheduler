@@ -110,11 +110,57 @@ values (1,'USA', curdate(), 'script', current_timestamp(), 'script');
 insert into countries (Country_ID, Country, Create_Date, Created_By, Last_Update, Last_Updated_By)
 values (2,'France', curdate(), 'script', current_timestamp(), 'script');
 
-insert into firstlevel_divisions (Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID)
-values (1,'Alabama', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Alabama', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Alaska', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Arizona', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Arkansas', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('California', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Colorado', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Connecticut', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Delaware', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Florida', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Georgia', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Hawaii', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Idaho', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Illinois', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Indiana', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Iowa', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Kansas', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Kentucky', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Louisiana', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Maine', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Maryland', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Massachusetts', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Michigan', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Minnesota', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Mississippi', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Missouri', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Montana', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Nebraska', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Nevada', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('New Hampshire', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('New Jersey', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('New Mexico', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('New York', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('North Carolina', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('North Dakota', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Ohio', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Oklahoma', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Oregon', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Pennsylvania', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Rhode Island', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('South Carolina', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('South Dakota', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Tennessee', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Texas', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Utah', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Vermont', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Virginia', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Washington', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('West Virginia', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Wisconsin', curdate(), 'script', current_timestamp(), 'script', 1);
+insert into firstlevel_divisions (Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID) values ('Wyoming', curdate(), 'script', current_timestamp(), 'script', 1);
 
-insert into firstlevel_divisions (Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID)
-values (2,'Alaska', curdate(), 'script', current_timestamp(), 'script', 1);
 
 insert into firstlevel_divisions (Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, Country_ID)
 values (3,'North FR', curdate(), 'script', current_timestamp(), 'script', 2);
