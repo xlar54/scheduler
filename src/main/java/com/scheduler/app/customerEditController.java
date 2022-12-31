@@ -5,8 +5,7 @@ import com.scheduler.pojo.Customer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -16,11 +15,22 @@ import java.util.ResourceBundle;
 
 
 public class customerEditController implements Initializable {
+    public ComboBox cboDivision;
+    public ComboBox cboCountry;
+    public TextField txtCustomerName;
+    public Label lblCustomerID;
+    public TextField txtAddress;
+    public TextField txtPostalCode;
+    public TextField txtPhoneNumber;
+    public Button btnSave;
+    public Button btnDelete;
+    public Label lblMessage;
     @FXML
     private TableView<Customer> customersTableView;
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public void initialize(URL location, ResourceBundle resources) {
 
         TableColumn<Customer, Integer> customerIDCol       = new TableColumn<Customer, Integer>("ID");

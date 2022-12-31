@@ -1,6 +1,8 @@
 package com.scheduler.pojo;
 
 public class FirstLevelDivision {
+
+	private int Division_ID;
 	private String Division;
 	private String Created_By;
 	private java.util.Date Last_Update;
@@ -8,6 +10,10 @@ public class FirstLevelDivision {
 	private java.util.Date Create_Date;
 	private String Last_Updated_By;
 	private int Country_ID;
+
+	public void setDivision_ID(int ID) {this.Division_ID = ID;}
+
+	public int getDivision_ID() { return this.Division_ID; }
 
 	public String getDivision(){
 		return Division;

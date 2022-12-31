@@ -1,5 +1,7 @@
 package com.scheduler.app;
 
+import com.scheduler.dao.FirstLevelDivisionDAO;
+import com.scheduler.pojo.FirstLevelDivision;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,23 +37,7 @@ public class App extends Application {
 
         public static void dadstestcode() throws Exception {
 
-            // this is just a temp function to test code.  delete when done
 
-            //CountryDAO countryDAO = new CountryDAO();
-            //countryDAO.insert("Spain", "scott");
-
-            /*Countries country = new Countries();
-            CountryDAO countryDAO = new CountryDAO();
-            country = countryDAO.getCountry(1);
-
-            System.out.println(country.getCountry());*/
-
-            FileLogger f = FileLogger.getInstance();
-            f.info("hello");
-
-            //UserDAO userDAO = new UserDAO();
-            //int count = userDAO.delete(3);
-            //System.out.println(count);
         }
 
     public static void nickstestcode() {

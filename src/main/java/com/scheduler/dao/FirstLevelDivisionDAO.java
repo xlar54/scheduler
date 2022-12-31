@@ -16,13 +16,13 @@ public class FirstLevelDivisionDAO {
 
 
     public FirstLevelDivision getByID(int ID) throws Exception {
-        FirstLevelDivision firstLevelDivision = new FirstLevelDivision();
-        final String sql = "select Division, Create_Date,Created_By, Last_Update,last_Updated_By, Country_ID " +
-                "from firstlevel_divisions where Division_ID =?";
+        FirstLevelDivision firstLevelDivision = null;
+        final String sql = "select Division_ID, Division, Create_Date,Created_By, Last_Update,last_Updated_By, " +
+                "Country_ID from firstlevel_divisions where Division_ID =?";
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(Config.getDBDriver());
             connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
 
             statement = connect.createStatement();
@@ -34,16 +34,15 @@ public class FirstLevelDivisionDAO {
             // execute query
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-
-                firstLevelDivision.setDivision(resultSet.getString(1));
-                firstLevelDivision.setCreate_Date(resultSet.getDate(2));
-                firstLevelDivision.setCountry_id(resultSet.getInt(3));
+            if (resultSet.next() ) {
+                firstLevelDivision = new FirstLevelDivision();
+                firstLevelDivision.setDivision_ID(resultSet.getInt(1));
+                firstLevelDivision.setDivision(resultSet.getString(2));
+                firstLevelDivision.setCreate_Date(resultSet.getDate(3));
                 firstLevelDivision.setCreated_by(resultSet.getString(4));
                 firstLevelDivision.setLast_update(resultSet.getDate(5));
                 firstLevelDivision.setLast_updated_by(resultSet.getString(6));
                 firstLevelDivision.setCountry_id(resultSet.getInt(7));
-
             }
 
         } catch (Exception e) {
