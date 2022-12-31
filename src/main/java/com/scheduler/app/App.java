@@ -1,9 +1,7 @@
 package com.scheduler.app;
 
 import com.scheduler.dao.AppointmentsDAO;
-import com.scheduler.dao.FirstLevelDivisionDAO;
 import com.scheduler.pojo.Appointment;
-import com.scheduler.pojo.FirstLevelDivision;
 import com.scheduler.pojo.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,10 +24,11 @@ public class App extends Application {
     public void start(Stage stage) throws IOException
     {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/primary.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 640);
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 250);
         stage.setTitle("Schedule Application");
         stage.setScene(scene);
+
         loginController controller = fxmlLoader.getController();
         int x = controller.setLanguage();
 
