@@ -1,6 +1,5 @@
 package com.scheduler.app;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -8,25 +7,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
-import javafx.scene.control.TableView;
-
 import com.scheduler.pojo.*;
 import com.scheduler.dao.UserDAO;
 import javafx.stage.WindowEvent;
 
+/***
+ *  The main login controller and menu selection form
+ */
 public class loginController implements Initializable {
     @FXML
     Button btnSignIn;
@@ -49,6 +47,16 @@ public class loginController implements Initializable {
     Button btnEditAppointments;
     Boolean french = false;
 
+    /***
+     * The override function which gets called when the controller starts
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -81,6 +89,10 @@ public class loginController implements Initializable {
 
     }
 
+    /***
+     * Code which sets the text label values based on the users locale
+     * @return
+     */
     int setLanguage()
     {
         String x = System.getProperty("user.language");
@@ -104,6 +116,14 @@ public class loginController implements Initializable {
         return y;
     }
 
+    /***
+     * The sign in button handler
+     * It will check the user login info against the database Users table,
+     * set the global logged in user, and address the french/english requirement
+     * based on the users machines locale
+     * @param event
+     * @throws Exception
+     */
     @FXML 
     void btnSignInHandler(ActionEvent event) throws Exception {
 
@@ -152,6 +172,10 @@ public class loginController implements Initializable {
         }
     }
 
+    /***
+     * The code called when the user presses the Edit Customers button
+     * @throws IOException
+     */
     void openCustomerEditForm() throws IOException {
 
         Stage stage = (Stage) btnSignIn.getScene().getWindow();
@@ -160,10 +184,11 @@ public class loginController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 800, 550);
         stage.setTitle("Schedule Application");
 
+        // Code to catch closing the window and return to main menu
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 try {
-                    closebackuptaskandshowmaintask(we);
+                    returnToLoginForm(we);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -177,8 +202,14 @@ public class loginController implements Initializable {
 
     }
 
-    private void closebackuptaskandshowmaintask(Event event) throws Exception {
-        // Decalaration of Variables
+    /**
+     * this code is attached to the other form Close Window events,
+     * and will return to the main menu (login) form
+     * @param event
+     * @throws Exception
+     */
+    private void returnToLoginForm(Event event) throws Exception {
+
         Stage stage, stage1;
         String eventstring;
 
@@ -204,6 +235,9 @@ public class loginController implements Initializable {
         stage1.show();
     }
 
+    /**
+     *  Enables the menu buttons (disables the login form)
+     */
     void enableMenu() {
 
         btnEditCustomers.setVisible(true);
@@ -217,6 +251,9 @@ public class loginController implements Initializable {
 
     }
 
+    /**
+     *  Enables the login form (disables menu buttons)
+     */
     void enableLogin() {
 
         btnEditCustomers.setVisible(false);
