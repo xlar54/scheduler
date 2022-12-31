@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scheduler.app.loginController">
+   <children>
+      <Label layoutX="47.0" layoutY="29.0" text="Customer Appointment Scheduler">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="56.0" text="By Nicholas Hutter" />
+      <Label fx:id="userNameLabel" layoutX="47.0" layoutY="123.0" text="Username" />
+      <Label fx:id="passWordLabel" layoutX="47.0" layoutY="155.0" text="Password" />
+      <TextField fx:id="txtUsername" layoutX="123.0" layoutY="119.0" />
+      <TextField fx:id="txtPassword" layoutX="123.0" layoutY="151.0" />
+      <Button fx:id="btnSignIn" layoutX="208.0" layoutY="195.0" mnemonicParsing="false" text="Log In" />
+      <Button fx:id="btnEditCustomers" layoutX="447.0" layoutY="119.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Edit Customers" />
+      <Button fx:id="btnEditAppointments" layoutX="447.0" layoutY="164.0" mnemonicParsing="false" text="Edit Appointments" />
+   </children>
+</Pane>
