@@ -4,6 +4,8 @@ public class FirstLevelDivision {
 	private String Division;
 	private String Created_By;
 	private java.util.Date Last_Update;
+
+	private java.util.Date Create_Date;
 	private String Last_Updated_By;
 	private int Country_ID;
 
@@ -46,4 +48,8 @@ public class FirstLevelDivision {
 	public void setCountry_id(int Country_ID){
 		this.Country_ID=Country_ID;
 	}
+
+	public void setCreate_Date(java.util.Date dateTime){this.Create_Date = dateTime;}
+
+	public java.util.Date getCreate_Date(){return Create_Date;}
 }
