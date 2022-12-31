@@ -7,6 +7,8 @@ import java.util.List;
 import com.scheduler.app.Config;
 import com.scheduler.pojo.Customer;
 import com.scheduler.app.FileLogger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class CustomerDAO {
@@ -15,9 +17,9 @@ public class CustomerDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    public ArrayList<Customer> getCustomerList() throws Exception {
+    public ObservableList<Customer> getCustomerList() throws Exception {
 
-        ArrayList<Customer> customerList = new ArrayList<>();
+        ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
         try {
 
@@ -27,8 +29,8 @@ public class CustomerDAO {
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement(
                     "select Customer_ID, Customer_Name, Address, Postal_Code,"+
-                            "Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID" +
-                            "from Customer");
+                            "Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID " +
+                            "from Customers");
 
             // setting the SQL parameters (one for each ?)
             //preparedStatement.setString(1, String.valueOf(ID));
@@ -39,6 +41,7 @@ public class CustomerDAO {
             while (resultSet.next()) {
 
                 Customer customer = new Customer();
+                customer.setCustomer_ID(resultSet.getInt(1));
                 customer.setCustomer_name(resultSet.getString(2));
                 customer.setAddress(resultSet.getString(3));
                 customer.setPostal_code(resultSet.getString(4));
