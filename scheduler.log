@@ -1,2 +1,2 @@
-Dec 31, 2022 11:32:54 AM com.scheduler.app.FileLogger warning
-WARNING: Unsupported conversion from TIMESTAMP to java.lang.Integer
+Dec 31, 2022 4:50:33 PM com.scheduler.app.FileLogger warning
+WARNING: Cannot add or update a child row: a foreign key constraint fails
