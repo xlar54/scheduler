@@ -3,6 +3,8 @@ package com.scheduler.dao;
 import com.scheduler.app.Config;
 import com.scheduler.app.FileLogger;
 import com.scheduler.pojo.Appointment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -16,10 +18,67 @@ public class AppointmentsDAO {
     private ResultSet resultSet = null;
 
 
+    public ObservableList<Appointment> getAll() throws Exception {
+
+        ObservableList<Appointment> apptList = FXCollections.observableArrayList();
+
+        final String sql = "select Appointment_ID, Title,Description,Location,Type, Start, End, Last_Update,"
+                + "Last_Updated_By,Customer_ID,User_ID, Contact_ID from appointments";
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(sql);
+
+            // setting the SQL parameters (one for each ?)
+            //preparedStatement.setString(1, String.valueOf(ID));
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Appointment appointment = new Appointment();
+                appointment.setAppointment_ID(resultSet.getInt(1));
+                appointment.setTitle(resultSet.getString(2));
+                appointment.setDescription(resultSet.getString(3));
+                appointment.setLocation(resultSet.getString(4));
+                appointment.setType(resultSet.getString(5));
+                appointment.setStart(resultSet.getDate(6));
+                appointment.setEnd(resultSet.getDate(7));
+                appointment.setLast_update(resultSet.getTimestamp(8));
+                appointment.setLast_updated_by(resultSet.getString(9));
+                appointment.setCustomer_ID(resultSet.getInt(10));
+                appointment.setUser_ID(resultSet.getInt(11));
+                appointment.setContact_ID(resultSet.getInt(12));
+                apptList.add(appointment);
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if (resultSet != null)
+                resultSet.close();
+
+            if (preparedStatement != null)
+                preparedStatement.close();
+
+            if (connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return apptList;
+        }
+    }
+
     public Appointment getByID(int ID) throws Exception {
         Appointment appointment = null;
-        final String sql = "select Title,Description,Location,Type, Start, End, Last_Update,Last_Updated_By, "
-                + "Customer_ID,User_ID, Contact_ID from appointments where Appointment_ID =?";
+        final String sql = "select Appointment_ID, Title,Description,Location,Type, Start, End, Last_Update,"
+                + "Last_Updated_By,Customer_ID,User_ID, Contact_ID from appointments where Appointment_ID =?";
 
         try {
 
@@ -37,15 +96,18 @@ public class AppointmentsDAO {
 
             if (resultSet.next()) {
                 appointment = new Appointment();
-                appointment.setTitle(resultSet.getString(1));
-                appointment.setDescription(resultSet.getString(2));
-                appointment.setLocation(resultSet.getString(3));
-                appointment.setType(resultSet.getString(4));
-                appointment.setLast_update(resultSet.getTimestamp(5));
-                appointment.setLast_updated_by(resultSet.getString(6));
-                appointment.setCustomer_id(resultSet.getInt(7));
-                appointment.setUser_id(resultSet.getInt(8));
-                appointment.setContact_id(resultSet.getInt(9));
+                appointment.setAppointment_ID(resultSet.getInt(1));
+                appointment.setTitle(resultSet.getString(2));
+                appointment.setDescription(resultSet.getString(3));
+                appointment.setLocation(resultSet.getString(4));
+                appointment.setType(resultSet.getString(5));
+                appointment.setStart(resultSet.getDate(6));
+                appointment.setEnd(resultSet.getDate(7));
+                appointment.setLast_update(resultSet.getTimestamp(8));
+                appointment.setLast_updated_by(resultSet.getString(9));
+                appointment.setCustomer_ID(resultSet.getInt(10));
+                appointment.setUser_ID(resultSet.getInt(11));
+                appointment.setContact_ID(resultSet.getInt(12));
             }
 
         } catch (Exception e) {
@@ -69,13 +131,15 @@ public class AppointmentsDAO {
 
 
 
-    public int insert(String division, String created_by, String last_Updated_By, int countryID ) throws Exception {
+    public int insert(String title, String description, String location, String type, Date start, Date end,
+                      int customerId, int userId, int contactId, String username) throws Exception {
 
         int count = 0;
-        final String sql = "insert into firstlevel_divisions " +
-                "(division, create_date,created_By, last_Update,last_Updated_By, country_ID) " +
-                "values (?,?,?,?,?,?)";
-//
+        final String sql = "insert into Appointments " +
+                "(Title,Description,Location,Type, Start, End, Last_Update," +
+                "Last_Updated_By, Create_Date, Created_By, Customer_ID, User_ID, Contact_ID) " +
+                "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
         try {
 
             Calendar cal = Calendar.getInstance();
@@ -88,16 +152,19 @@ public class AppointmentsDAO {
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setString(1, division);
-            preparedStatement.setTimestamp(2, timestamp);
-            preparedStatement.setString(3,created_by);
-            preparedStatement.setTimestamp(4,timestamp);
-            preparedStatement.setString(5,last_Updated_By);
-            preparedStatement.setInt(6,countryID);
-
-            //need to make function check for previous created by timestamp to ensure accuracy
-
-
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, description);
+            preparedStatement.setString(3, location);
+            preparedStatement.setString(4, type);
+            preparedStatement.setDate(5, start);
+            preparedStatement.setDate(6, end);
+            preparedStatement.setTimestamp(7, timestamp);
+            preparedStatement.setString(8, username);
+            preparedStatement.setTimestamp(9, timestamp);
+            preparedStatement.setString(10, username);
+            preparedStatement.setInt(11,customerId);
+            preparedStatement.setInt(12,userId);
+            preparedStatement.setInt(13,contactId);
 
             // execute query
             count = preparedStatement.executeUpdate();
@@ -122,21 +189,14 @@ public class AppointmentsDAO {
     }
 
     public int update(int Appointment_ID, String Title, String Description, String Location,
-                      String Type, Date Start, Date End, String Created_By, Timestamp Last_Update,
-                      String Last_Updated_By, int Customer_ID, int user_ID, int Contact_ID ) throws Exception {
+                      String Type, Date Start, Date End, int Customer_ID, int user_ID, int Contact_ID,
+                      String username) throws Exception {
 
         int count = 0;
-        AppointmentsDAO appointmentsDAO= new AppointmentsDAO();
-        Appointment appointment = new Appointment();
-        appointment = getByID(Appointment_ID);
-
 
         final String sql = "update appointments set Title=?,Description=?, Location=?,Type=?, Start=?, End=?," +
-                " Created_By=?, Last_Update=?, Last_Updated_By=?, Customer_ID=?, User_ID=?, Contact_ID=?" +
+                "Last_Update=?, Last_Updated_By=?, Customer_ID=?, User_ID=?, Contact_ID=?" +
                 " where Appointment_ID=? ";
-
-
-
 
         try {
 
@@ -145,28 +205,26 @@ public class AppointmentsDAO {
 
             Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
             Date date = new Date(timestamp.getTime());
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(Config.getDBDriver());
             connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
 
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement(sql);
 
             // setting the SQL parameters (one for each ?)
-            preparedStatement.setInt(1,Appointment_ID );
-            preparedStatement.setString(2, Title);
-            preparedStatement.setString(3, Description);
-            preparedStatement.setString(4,Location);
-            preparedStatement.setString(5, Type);
-            preparedStatement.setDate(6,date);
-            preparedStatement.setDate(7,date);
-            preparedStatement.setString(8, Created_By);
-            preparedStatement.setTimestamp(9, timestamp);
-            preparedStatement.setString(10,Last_Updated_By);
-            preparedStatement.setInt(11, Customer_ID);
-            preparedStatement.setInt(12,user_ID);
-            preparedStatement.setInt(13,Contact_ID );
 
-
+            preparedStatement.setString(1, Title);
+            preparedStatement.setString(2, Description);
+            preparedStatement.setString(3,Location);
+            preparedStatement.setString(4, Type);
+            preparedStatement.setDate(5,Start);
+            preparedStatement.setDate(6,End);
+            preparedStatement.setTimestamp(7, timestamp);
+            preparedStatement.setString(8, username);
+            preparedStatement.setInt(9, Customer_ID);
+            preparedStatement.setInt(10,user_ID);
+            preparedStatement.setInt(11,Contact_ID );
+            preparedStatement.setInt(12,Appointment_ID );
 
             // execute query
             count = preparedStatement.executeUpdate();
@@ -192,13 +250,9 @@ public class AppointmentsDAO {
     public int delete(int ID) throws Exception {
 
         int count = 0;
-        final String sql = "delete from firstlevel_Divisions where Division_ID=?";
+        final String sql = "delete from Appointments where Appointment_ID=?";
 
         try {
-
-            Calendar cal = Calendar.getInstance();
-            Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
-
             Class.forName(Config.getDBDriver());
             connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
 

@@ -87,6 +87,17 @@ public class loginController implements Initializable {
             }
         });
 
+        btnEditAppointments.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    openAppointmentsEditForm();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
 
     /***
@@ -181,6 +192,31 @@ public class loginController implements Initializable {
         Stage stage = (Stage) btnSignIn.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/customerEdit.fxml"));
         //Scene scene = new Scene(fxmlLoader.load(), 500, 640);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 550);
+        stage.setTitle("Schedule Application");
+
+        // Code to catch closing the window and return to main menu
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                try {
+                    returnToLoginForm(we);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        // center on screen
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+        stage.setScene(scene);
+
+    }
+
+    void openAppointmentsEditForm() throws IOException {
+
+        Stage stage = (Stage) btnSignIn.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/appointmentsEdit.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 550);
         stage.setTitle("Schedule Application");
 

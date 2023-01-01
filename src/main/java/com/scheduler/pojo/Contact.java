@@ -24,5 +24,10 @@ public void setEmail(String Email){
 
         public void setContact_ID(int ID){this.Contact_ID = ID;}
         public int getContact_ID(){return this.Contact_ID;}
+
+        @Override
+        public String toString() {
+                return this.getContact_name();
+        }
 }
 
