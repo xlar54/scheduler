@@ -47,14 +47,6 @@ public class App extends Application {
 
     public static void nickstestcode() throws Exception{
 
-        // this is just a temp function to test code.  delete when done'
-        Date date = null;
-        Calendar cal = Calendar.getInstance();
-        Timestamp ts = new Timestamp(cal.getTimeInMillis());
-        AppointmentsDAO appointmentsDAO = new AppointmentsDAO();
-         appointmentsDAO.update(1,"thisTitle", "myTitle","location",
-                "mytype", date, date, "nicholas", ts, "nicholas", 1, 1, 1);
-
 
     }
 }

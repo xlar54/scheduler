@@ -1,18 +1,27 @@
 package com.scheduler.pojo;
 
-public class Appointment {
-        private String Title;
-        private int Appointment_ID;
+import java.util.Date;
 
+public class Appointment {
+        private int Appointment_ID;
+        private String Title;
         private String Description;
         private String Location;
         private String Type;
+        private Date Start;
+        private Date End;
         private String Created_By;
         private java.util.Date Last_Update;
         private String Last_Updated_By;
         private int Customer_ID;
         private int User_ID;
         private int Contact_ID;
+
+        public int getAppointment_ID() {
+                return Appointment_ID;
+        }
+
+        public void setAppointment_ID(int ID) {this.Appointment_ID = ID; }
 
         public String getTitle() {
                 return Title;
@@ -41,9 +50,22 @@ public class Appointment {
         public String getType() {
                 return Type;
         }
-
         public void setType(String Type) {
                 this.Type = Type;
+        }
+
+        public Date getStart() {
+                return Start;
+        }
+        public void setStart(Date Start) {
+                this.Start = Start;
+        }
+
+        public Date getEnd() {
+                return End;
+        }
+        public void setEnd(Date End) {
+                this.End = End;
         }
 
         public String getCreated_by() {
@@ -70,32 +92,28 @@ public class Appointment {
                 this.Last_Updated_By = Last_Updated_By;
         }
 
-        public int getCustomer_id() {
+        public int getCustomer_ID() {
                 return Customer_ID;
         }
 
-        public void setCustomer_id(int Customer_ID) {
+        public void setCustomer_ID(int Customer_ID) {
                 this.Customer_ID = Customer_ID;
         }
 
-        public int getUser_id() {
+        public int getUser_ID() {
                 return User_ID;
         }
 
-        public void setUser_id(int User_ID) {
+        public void setUser_ID(int User_ID) {
                 this.User_ID = User_ID;
         }
 
-        public int getContact_id() {
+        public int getContact_ID() {
                 return Contact_ID;
         }
 
-        public void setContact_id(int Contact_ID) {
+        public void setContact_ID(int Contact_ID) {
                 this.Contact_ID = Contact_ID;
         }
-        public void setAppointment_ID(int Appointment_ID){
-                this.Appointment_ID = Appointment_ID;
-        }
-        public int getAppointment_ID(){return this.Appointment_ID;}
 
 }
