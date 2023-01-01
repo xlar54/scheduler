@@ -4,6 +4,8 @@ import com.scheduler.app.Config;
 import com.scheduler.app.FileLogger;
 import com.scheduler.pojo.Contact;
 import com.scheduler.pojo.Country;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.Calendar;
@@ -20,6 +22,7 @@ public class ContactsDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+
     /**
      * Gets a contact from the database based on the given input
      *
@@ -28,13 +31,61 @@ public class ContactsDAO {
      * based on the contact ID
      * @throws Exception
      */
+
+    public ObservableList<Contact> getAll() throws Exception {
+
+        ObservableList<Contact> contacts = FXCollections.observableArrayList();
+
+        final String sql = "select Contact_ID, Contact_Name, Email from Contacts";
+
+        try {
+
+            Class.forName(Config.getDBDriver());
+            connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
+
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement(sql);
+
+            // setting the SQL parameters (one for each ?)
+            //preparedStatement.setString(1, String.valueOf(ID));
+
+            // execute query
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Contact contact = new Contact();
+                contact.setContact_ID(resultSet.getInt(1));
+                contact.setContact_name(resultSet.getString(2));
+                contact.setEmail(resultSet.getString(3));
+                contacts.add(contact);
+            }
+
+        } catch (Exception e) {
+            FileLogger.getInstance().warning(e.getMessage());
+        } finally {
+
+            // close everything
+            if(resultSet != null)
+                resultSet.close();
+
+            if(preparedStatement != null)
+                preparedStatement.close();
+
+            if(connect != null)
+                connect.close();
+
+            // return the dataset or value (or nothing)
+            return contacts;
+        }
+    }
+
     public Contact getByID(int ID) throws Exception {
         Contact contact = new Contact();
         final String sql = "select Contact_ID, Contact_Name, Email from Contacts where Contact_ID=?";
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(Config.getDBDriver());
             connect = DriverManager.getConnection(Config.getDatabase(), Config.getDBUser(), Config.getDBPassword());
 
             statement = connect.createStatement();

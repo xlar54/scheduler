@@ -1,16 +1,22 @@
 package com.scheduler.pojo;
 
+
 /**
  * all plain old java objects are containers for some type of database record
  * they do not contain logic and only have private members
  */
-public class Appointment {
-        private String Title;
-        private int Appointment_ID;
+=======
+import java.util.Date;
 
+
+public class Appointment {
+        private int Appointment_ID;
+        private String Title;
         private String Description;
         private String Location;
         private String Type;
+        private Date Start;
+        private Date End;
         private String Created_By;
         private java.util.Date Last_Update;
         private String Last_Updated_By;
@@ -18,10 +24,18 @@ public class Appointment {
         private int User_ID;
         private int Contact_ID;
 
+
         /**
-         *getter for title
-         * @return return title
+         *getter for Appointment_ID
+         * @return return Appointment_ID
          */
+        public int getAppointment_ID() {
+                return Appointment_ID;
+        }
+
+        public void setAppointment_ID(int ID) {this.Appointment_ID = ID; }
+
+
         public String getTitle() {
                 return Title;
         }
@@ -74,18 +88,37 @@ public class Appointment {
                 return Type;
         }
 
+
         /**
          * setter for type
          * @param Type type
          */
+
         public void setType(String Type) {
                 this.Type = Type;
         }
+
 
         /**
          * getter for createdby
          * @return createdby
          */
+
+        public Date getStart() {
+                return Start;
+        }
+        public void setStart(Date Start) {
+                this.Start = Start;
+        }
+
+        public Date getEnd() {
+                return End;
+        }
+        public void setEnd(Date End) {
+                this.End = End;
+        }
+
+
         public String getCreated_by() {
                 return Created_By;
         }
@@ -129,6 +162,7 @@ public class Appointment {
         public void setLast_updated_by(String Last_Updated_By) {
                 this.Last_Updated_By = Last_Updated_By;
         }
+
 
         /**
          * getter for customerId
@@ -191,5 +225,30 @@ public class Appointment {
          * @return appointmentID
          */
         public int getAppointment_ID(){return this.Appointment_ID;}
+
+        public int getCustomer_ID() {
+                return Customer_ID;
+        }
+
+        public void setCustomer_ID(int Customer_ID) {
+                this.Customer_ID = Customer_ID;
+        }
+
+        public int getUser_ID() {
+                return User_ID;
+        }
+
+        public void setUser_ID(int User_ID) {
+                this.User_ID = User_ID;
+        }
+
+        public int getContact_ID() {
+                return Contact_ID;
+        }
+
+        public void setContact_ID(int Contact_ID) {
+                this.Contact_ID = Contact_ID;
+        }
+
 
 }
