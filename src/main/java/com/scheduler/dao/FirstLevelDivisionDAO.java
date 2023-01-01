@@ -11,12 +11,23 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * all data access objects are created to encapsulate logic, members,
+ * and functions
+ * of the data that need not be in the plain old java objects classes
+ */
 public class FirstLevelDivisionDAO {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * getByID returns a firstLevelDivision from the database by ID
+     * @param ID field that specifies the ID
+     * @return return a firstleveldivision
+     * @throws Exception
+     */
     public FirstLevelDivision getByID(int ID) throws Exception {
         FirstLevelDivision firstLevelDivision = null;
         final String sql = "select Division_ID, Division, Create_Date,Created_By, Last_Update,last_Updated_By, " +
@@ -65,7 +76,10 @@ public class FirstLevelDivisionDAO {
             return firstLevelDivision;
         }
     }
-
+/**
+ * getByCountryName gets the firstleveldivision based on user input
+ * @param countryName field used to specify which firstleveldivision
+ */
     public ObservableList<FirstLevelDivision> getByCountryName(String countryName) throws Exception {
 
         ObservableList<FirstLevelDivision> fldList = FXCollections.observableArrayList();
@@ -122,6 +136,15 @@ public class FirstLevelDivisionDAO {
         }
     }
 
+    /**
+     * insert inserts a new firstleveldivision record into the application
+     * @param division which area
+     * @param created_by user who created
+     * @param last_Updated_By timestamp when updated last
+     * @param countryID ID for which country the division is located
+     * @return
+     * @throws Exception
+     */
     public int insert(String division, String created_by, String last_Updated_By, int countryID ) throws Exception {
 
         int count = 0;
@@ -174,6 +197,16 @@ public class FirstLevelDivisionDAO {
         }
     }
 
+    /**
+     * update updates an existing firstleveldivision record based on user input
+     * @param division_ID field which specifies the record
+     * @param division field which specifies area
+     * @param created_by user who created originally
+     * @param last_Updated_By user who last updated
+     * @param countryID field which specifies which country
+     * @return
+     * @throws Exception
+     */
     public int update(int division_ID, String division, String created_by, String last_Updated_By, int countryID ) throws Exception {
 
         int count = 0;
@@ -226,6 +259,13 @@ public class FirstLevelDivisionDAO {
             return count;
         }
     }
+
+    /**
+     * delete deletes an existing firstleveldivisions record based on user input
+     * @param ID field used to specify firstleveldivision record
+     * @return return count of records changed, if any
+     * @throws Exception
+     */
     public int delete(int ID) throws Exception {
 
         int count = 0;

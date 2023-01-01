@@ -11,6 +11,12 @@ import com.scheduler.pojo.CustomerRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * /**
+ *  * all data access objects are created to encapsulate logic, members,
+ *  * and functions
+ *  * of the data that need not be in the plain old java objects classes
+ *  */
 
 public class CustomerDAO {
     private Connection connect = null;
@@ -18,6 +24,11 @@ public class CustomerDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * get customer information from database
+     * @return the customers information list
+     * @throws Exception
+     */
     public ObservableList<Customer> getCustomerList() throws Exception {
 
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -75,6 +86,12 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * getCustomerRows uses a sql innner join to combine multiple fields
+     * to display the results in the tableview correctly
+     * @return
+     * @throws Exception
+     */
     public ObservableList<CustomerRow> getCustomerRows() throws Exception {
 
         ObservableList<CustomerRow> customerRows = FXCollections.observableArrayList();
@@ -96,7 +113,6 @@ public class CustomerDAO {
                             "order by c.Customer_ID");
 
             // setting the SQL parameters (one for each ?)
-            //preparedStatement.setString(1, String.valueOf(ID));
 
             // execute query
             resultSet = preparedStatement.executeQuery();
@@ -137,6 +153,13 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * getCustomerbyID grabs the customer record based on user input
+     * customerID
+     * @param ID field used to identify the customer record
+     * @return
+     * @throws Exception
+     */
     public Customer getCustomerByID(int ID) throws Exception {
         Customer customer = new Customer();
 
@@ -188,7 +211,17 @@ public class CustomerDAO {
         }
     }
 
-
+    /**
+     * insert inserts a new customer record into the application
+     * @param customerName name customer field
+     * @param address customer address field
+     * @param postalCode customer pc field
+     * @param phone customer phone number field
+     * @param divisionId customer division
+     * @param username username of user who made change
+     * @return
+     * @throws Exception
+     */
     public int insert(String customerName, String address, String postalCode, String phone, int divisionId,
                       String username) throws Exception {
 
@@ -242,6 +275,19 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * update updates the existing customer record based on
+     * user input
+     * @param ID id used to identify customer record
+     * @param customerName customer name field
+     * @param address customer address field
+     * @param postalCode customer pc field
+     * @param phone customer phone number field
+     * @param divisionId customer division
+     * @param username name of user who made change
+     * @return
+     * @throws Exception
+     */
     public int update(int ID, String customerName, String address, String postalCode, String phone, int divisionId,
                       String username) throws Exception {
 
@@ -294,6 +340,13 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * delete deletes an existing customer record based
+     * on user input
+     * @param ID field used to specify which customer
+     * @return return count of lines changed, if any
+     * @throws Exception
+     */
     public int delete(int ID) throws Exception {
 
         int count = 0;
