@@ -10,6 +10,12 @@ import com.scheduler.app.FileLogger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * /**
+ *  * all data access objects are created to encapsulate logic, members,
+ *  * and functions
+ *  * of the data that need not be in the plain old java objects classes
+ *  */
 
 public class CountryDAO {
     private Connection connect = null;
@@ -17,6 +23,12 @@ public class CountryDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * get an observable list object populated with
+     * country data from the database
+     * @return return observable list
+     * @throws Exception
+     */
     public ObservableList<Country> getAll() throws Exception {
 
         ObservableList<Country> countries = FXCollections.observableArrayList();
@@ -67,6 +79,13 @@ public class CountryDAO {
             return countries;
         }
     }
+
+    /**
+     * getbyID gets the country object from the database
+     * @param ID used to get the countryID from the database
+     * @return return country object
+     * @throws Exception
+     */
     public Country getByID(int ID) throws Exception {
         Country country = new Country();
         final String sql = "select Country from Countries where Country_ID=?";
@@ -108,6 +127,13 @@ public class CountryDAO {
         }
     }
 
+    /**
+     * insert inserts a new country into the database
+     * @param country the country
+     * @param username username of the user who made the change
+     * @return return count of any lines changed
+     * @throws Exception
+     */
     public int insert(String country, String username) throws Exception {
 
         int count = 0;
@@ -155,6 +181,14 @@ public class CountryDAO {
         }
     }
 
+    /**
+     * update will update an existing country in the application
+     * @param countryId ID used to identify country
+     * @param country name field for country
+     * @param username name field for user who made the change
+     * @return
+     * @throws Exception
+     */
     public int update(int countryId, String country, String username) throws Exception {
 
         int count = 0;
@@ -200,10 +234,17 @@ public class CountryDAO {
             return count;
         }
     }
+
+    /**
+     * delete deletes a country from the database
+     * @param ID field used to identify country
+     * @return return count of records changed if any
+     * @throws Exception
+     */
     public int delete(int ID) throws Exception {
 
         int count = 0;
-        final String sql = "delete from Users where User_ID=?";
+        final String sql = "delete from Countries where Country_ID=?";
 
         try {
 

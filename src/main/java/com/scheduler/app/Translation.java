@@ -3,6 +3,10 @@ package com.scheduler.app;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+/**
+ * translation class encapsulates language switching
+ * based on user system language
+ */
 public class Translation {
 
     public enum Language {
@@ -22,6 +26,11 @@ public class Translation {
 
     private static Translation single_instance = null;
 
+    /**
+     * translation should only be a single instance
+     * in this application
+     * @return
+     */
     public static Translation getInstance()
     {
         if (single_instance == null)
@@ -31,6 +40,11 @@ public class Translation {
 
         return single_instance;
     }
+
+    /**
+     * initialize uses the javaFX api to create the dictionary objects
+     * that will be used to switch between english and french
+     */
     private void initialize() {
 
         // set up the dictionary
@@ -52,6 +66,12 @@ public class Translation {
 
     }
 
+    /**
+     * getText gets the language text to be used for each element on the sign in form
+     * @param language
+     * @param languageKey
+     * @return
+     */
     public String getText(Language language, LanguageKey languageKey) {
 
         String returnVal;
