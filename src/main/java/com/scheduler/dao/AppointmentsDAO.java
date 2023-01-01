@@ -11,12 +11,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * all data access objects are created to encapsulate logic, members,
+ * and functions
+ * of the data that need not be in the plain old java objects classes
+ */
 public class AppointmentsDAO {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * Gets an appointment from the database based on the given input
+     * appointment
+     * @param ID used to get the appointment ID from the database
+     * @return return an appointment object filled with database data
+     * based on the appointment ID
+     * @throws Exception
+     */
 
     public ObservableList<Appointment> getAll() throws Exception {
 
@@ -75,6 +88,7 @@ public class AppointmentsDAO {
         }
     }
 
+
     public Appointment getByID(int ID) throws Exception {
         Appointment appointment = null;
         final String sql = "select Appointment_ID, Title,Description,Location,Type, Start, End, Last_Update,"
@@ -129,7 +143,15 @@ public class AppointmentsDAO {
         }
     }
 
-
+    /**
+     * insert inserts a new appointment into the database
+     * @param division  division of country
+     * @param created_by created by user
+     * @param last_Updated_By lastupdatedby user
+     * @param countryID used to find country
+     * @return returns any lines changed
+     * @throws Exception
+     */
 
     public int insert(String title, String description, String location, String type, Date start, Date end,
                       int customerId, int userId, int contactId, String username) throws Exception {
@@ -188,6 +210,24 @@ public class AppointmentsDAO {
         }
     }
 
+    /**
+     * update will update an existing appointment in the application
+     * @param Appointment_ID field used to identify appointment
+     * @param Title appt title
+     * @param Description field used to describe purpose of appt
+     * @param Location where is the appt
+     * @param Type type of appt
+     * @param Start appt start
+     * @param End appt end
+     * @param Created_By user created appt
+     * @param Last_Update timestamp of last update
+     * @param Last_Updated_By user last updated
+     * @param Customer_ID field used to identify customer
+     * @param user_ID  foreign key for users table in database
+     * @param Contact_ID foreign key for contact table
+     * @return
+     * @throws Exception
+     */
     public int update(int Appointment_ID, String Title, String Description, String Location,
                       String Type, Date Start, Date End, int Customer_ID, int user_ID, int Contact_ID,
                       String username) throws Exception {
@@ -247,10 +287,19 @@ public class AppointmentsDAO {
             return count;
         }
     }
+
+    /**
+     * delete an existing appointment from the application and database
+     * @param ID appointment ID used to identify which record
+     * @return return number of lines changed, if any
+     * @throws Exception
+     */
     public int delete(int ID) throws Exception {
 
         int count = 0;
+
         final String sql = "delete from Appointments where Appointment_ID=?";
+
 
         try {
             Class.forName(Config.getDBDriver());

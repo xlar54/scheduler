@@ -7,13 +7,23 @@ import com.scheduler.pojo.User;
 import java.sql.*;
 import java.util.Calendar;
 
-
+/**
+ * all data access objects are created to encapsulate logic, members,
+ * and functions
+ * of the data that need not be in the plain old java objects classes
+ */
 public class UserDAO {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * get user record from database based on user input
+     * @param ID field which specifys the record
+     * @return return user object
+     * @throws Exception
+     */
     public User getUserByID(int ID) throws Exception {
         User user = new User();
 
@@ -62,6 +72,13 @@ public class UserDAO {
         }
     }
 
+    /**
+     * getuserbyusernamepassword gets the user record from the database based on user input
+     * @param userName field which specifys the record
+     * @param password field which specifys the record
+     * @return return user object
+     * @throws Exception
+     */
     public User getUserByUsernamePassword(String userName, String password) throws Exception {
         User user = null;
 
@@ -114,6 +131,14 @@ public class UserDAO {
         }
     }
 
+    /**
+     * insert inserts a user record into the database using user input
+     * @param userName first username
+     * @param password password
+     * @param username second username
+     * @return return count of records affected, if any
+     * @throws Exception
+     */
     public int insert(String userName, String password, String username) throws Exception {
 
         int count = 0;
@@ -162,6 +187,15 @@ public class UserDAO {
         }
     }
 
+    /**
+     * update updates the existing user records based on user input
+     * @param ID id specifying which record
+     * @param userName first username field
+     * @param password password field
+     * @param username second username field
+     * @return return count of lines changed, if any
+     * @throws Exception
+     */
     public int update(int ID, String userName, String password, String username) throws Exception {
 
         int count = 0;
@@ -210,6 +244,12 @@ public class UserDAO {
         }
     }
 
+    /**
+     * delete deletes a user record based on user input
+     * @param ID field used to specify the record
+     * @return return a count of lines changed, if any
+     * @throws Exception
+     */
     public int delete(int ID) throws Exception {
 
         int count = 0;

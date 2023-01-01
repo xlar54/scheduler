@@ -10,11 +10,27 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.util.Calendar;
 
+/**
+ * /**
+ *  * all data access objects are created to encapsulate logic, members,
+ *  * and functions
+ *  * of the data that need not be in the plain old java objects classes
+ *  */
 public class ContactsDAO {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+
+
+    /**
+     * Gets a contact from the database based on the given input
+     *
+     * @param ID used to get the contactID from the database
+     * @return return a contact object filled with database data
+     * based on the contact ID
+     * @throws Exception
+     */
 
     public ObservableList<Contact> getAll() throws Exception {
 
@@ -62,6 +78,7 @@ public class ContactsDAO {
             return contacts;
         }
     }
+
     public Contact getByID(int ID) throws Exception {
         Contact contact = new Contact();
         final String sql = "select Contact_ID, Contact_Name, Email from Contacts where Contact_ID=?";
@@ -104,6 +121,13 @@ public class ContactsDAO {
             return contact;
         }
     }
+    /**
+     * insert inserts a new contact into the database
+     * @param Contact_Name  contacts name field
+     * @param Email email name field
+     * @return returns any lines changed
+     * @throws Exception
+     */
 
     public int insert(String Contact_Name, String Email ) throws Exception {
 
@@ -150,6 +174,14 @@ public class ContactsDAO {
         }
     }
 
+    /**
+     * update will update an existing contact in the application
+     * @param Contact_ID ID used to identify which contact
+     * @param Contact_Name name field
+     * @param Email email field
+     * @return
+     * @throws Exception
+     */
     public int update(int Contact_ID, String Contact_Name, String Email) throws Exception {
 
         int count = 0;
@@ -194,6 +226,14 @@ public class ContactsDAO {
             return count;
         }
     }
+
+    /**
+     * delete removes a contact object from the database
+     * @param ID iD used to identify the specific contact to
+     *           delete
+     * @return return a count of lines changed, if any
+     * @throws Exception
+     */
     public int delete(int ID) throws Exception {
 
         int count = 0;
