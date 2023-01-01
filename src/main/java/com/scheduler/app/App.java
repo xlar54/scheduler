@@ -25,9 +25,7 @@ public class App extends Application {
      * @param args arguments for the compiler at runtime
      * @throws Exception
      */
-    public static void main (String[]args) throws Exception {
-    testcode();
-    }
+
 
     /**
      * start function is the javafx function that initializes the scene
@@ -54,13 +52,5 @@ public class App extends Application {
 
     }
 
-    /**
-     * testcode method was used in the development of the project to
-     * test one component at a time
-     * @throws Exception generic exception in case testing errors for syntax, null pointer, etc
-     */
-    public static void testcode() throws Exception{
 
-
-    }
 }

@@ -5,7 +5,6 @@ package com.scheduler.pojo;
  * all plain old java objects are containers for some type of database record
  * they do not contain logic and only have private members
  */
-=======
 import java.util.Date;
 
 
@@ -99,10 +98,7 @@ public class Appointment {
         }
 
 
-        /**
-         * getter for createdby
-         * @return createdby
-         */
+
 
         public Date getStart() {
                 return Start;
@@ -118,7 +114,10 @@ public class Appointment {
                 this.End = End;
         }
 
-
+        /**
+         * getter for createdby
+         * @return createdby
+         */
         public String getCreated_by() {
                 return Created_By;
         }
@@ -211,20 +210,6 @@ public class Appointment {
         public void setContact_id(int Contact_ID) {
                 this.Contact_ID = Contact_ID;
         }
-
-        /**
-         *setter for appointmentID
-         * @param Appointment_ID appointmentID
-         */
-        public void setAppointment_ID(int Appointment_ID){
-                this.Appointment_ID = Appointment_ID;
-        }
-
-        /**
-         *getter for appointmentID
-         * @return appointmentID
-         */
-        public int getAppointment_ID(){return this.Appointment_ID;}
 
         public int getCustomer_ID() {
                 return Customer_ID;
