@@ -1,7 +1,6 @@
 package com.scheduler.app;
 
 import com.scheduler.dao.AppointmentsDAO;
-import com.scheduler.pojo.Appointment;
 import com.scheduler.pojo.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,16 +10,31 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Calendar;
 
+/**
+ * Represents the main application class
+ * this class contains main, start, and testcode methods
+ *
+ */
 public class App extends Application {
 
     public static User loggedInUser = null;
 
+    /**
+     * main method used to initialize the testcode function
+     * if there is any code to test
+     * @param args arguments for the compiler at runtime
+     * @throws Exception
+     */
     public static void main (String[]args) throws Exception {
-
-        nickstestcode();
-        dadstestcode();
-        launch();
+    testcode();
     }
+
+    /**
+     * start function is the javafx function that initializes the scene
+     * also calls function setlanguage which changes based on user language setting
+     * @param stage the javafx stage object
+     * @throws IOException
+     */
     public void start(Stage stage) throws IOException
     {
 
@@ -40,12 +54,12 @@ public class App extends Application {
 
     }
 
-        public static void dadstestcode() throws Exception {
-
-
-        }
-
-    public static void nickstestcode() throws Exception{
+    /**
+     * testcode method was used in the development of the project to
+     * test one component at a time
+     * @throws Exception generic exception in case testing errors for syntax, null pointer, etc
+     */
+    public static void testcode() throws Exception{
 
         // this is just a temp function to test code.  delete when done'
         Date date = null;

@@ -9,16 +9,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+/**
+ * appointments controller is a controller class
+ * that creates the FXML for the appointments
+ * in the application
+ */
 public class appointmentsController implements Initializable {
 
     @FXML
     private TableView appointmentsTableView;
 
-    @FXML
-    private void switchToPrimary() throws IOException {
-        //App.setRoot("primary");
-    }
-
+    /**
+     * initialize sets up the tablecolumn objects
+     * for the tableview to display
+     * @param location  javafx parameter
+     * @param resources javafx parameter
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

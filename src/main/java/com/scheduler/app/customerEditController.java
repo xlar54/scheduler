@@ -22,10 +22,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-
-
+/**
+ * customerEditController the controller class for editing customer information
+ *
+ */
 public class customerEditController implements Initializable {
-
     public ComboBox<FirstLevelDivision> cboDivision;
     public ComboBox<Country> cboCountry;
     public TextField txtCustomerName;
@@ -45,7 +46,11 @@ public class customerEditController implements Initializable {
     ChangeListener<Country> countryComboBoxChangeListener;
     ChangeListener<FirstLevelDivision> divisionComboBoxChangeListener;
 
-
+    /**
+     * initialize method uses the javafx api to create the scene
+     * @param location javafx
+     * @param resources javafx
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -87,6 +92,12 @@ public class customerEditController implements Initializable {
         });
 
         divisionComboBoxChangeListener = new ChangeListener<FirstLevelDivision>() {
+            /**
+             * changed function just gets division ID
+             * @param observable value can be seen in gui
+             * @param oldValue old value
+             * @param newValue new value
+             */
             @Override
             public void changed(ObservableValue<? extends FirstLevelDivision> observable, FirstLevelDivision oldValue, FirstLevelDivision newValue) {
                 FirstLevelDivision firstLevelDivision = (FirstLevelDivision) cboDivision.getSelectionModel().getSelectedItem();
@@ -117,6 +128,10 @@ public class customerEditController implements Initializable {
 
     }
 
+    /**
+     * inittableview creates the table view
+     * by adding a list of columns using factory methods
+     */
     private void initTableView() {
 
         TableColumn<CustomerRow, Integer> customerIDCol       = new TableColumn<CustomerRow, Integer>("ID");
@@ -149,7 +164,9 @@ public class customerEditController implements Initializable {
         customersTableView.getColumns().addAll(customerIDCol,customerNameCol,customerAddressCol,
                 customerPostalCol, customerPhoneCol, customerDivisionCol, customerCountryCol);
 
-        // Here is a lambda method as requested on document
+        /**
+         * @see lambda expression to capture mouse click
+         */
         customersTableView.setOnMouseClicked((MouseEvent event) -> {
             try {
                 onCustomerTableViewSelectedRow();
@@ -161,6 +178,11 @@ public class customerEditController implements Initializable {
 
     /// Initializes the Country combo box from SQl and
     /// sets the listeners for change events
+
+    /**
+     * initCountryComboBox sets up the combobox for the countries in the application
+     * @throws Exception
+     */
     private void initCountryComboBox() throws Exception {
 
         cboCountry.getItems().clear();
@@ -199,6 +221,11 @@ public class customerEditController implements Initializable {
         cboCountry.valueProperty().addListener(countryComboBoxChangeListener);
     }
 
+    /**
+     * refresh tableview takes the already created
+     * tableview object and isolates the clear function
+     * @throws Exception
+     */
     private void refreshTableViewData() throws Exception {
 
         customersTableView.getItems().clear();
@@ -209,6 +236,14 @@ public class customerEditController implements Initializable {
         customersTableView.getItems().addAll(customers);
 
     }
+
+    /**
+     * onCustomerTableViewSelectedRow allows the user to select
+     * a row from the tableview and controls the behavior of the
+     * ui fields and comboboxes
+     *
+     * @throws Exception
+     */
 
     public void onCustomerTableViewSelectedRow() throws Exception {
 
@@ -237,6 +272,12 @@ public class customerEditController implements Initializable {
         }
     }
 
+    /**
+     * clearFormData takes all label objects and
+     * textfield objects and clears their text to isolate
+     * the clear function
+     * @throws Exception
+     */
     void clearFormData() throws Exception {
 
         lblCustomerID.setText("New");
@@ -253,6 +294,13 @@ public class customerEditController implements Initializable {
         countryId = 0;
 
     }
+
+    /**
+     * saveCustomer saves the customer in the database based
+     * on user input whether new customer is created or
+     * existing customer is updated
+     * @throws Exception
+     */
     void saveCustomer() throws Exception {
 
         if (validateInput() == false)
@@ -274,6 +322,11 @@ public class customerEditController implements Initializable {
         clearFormData();
     }
 
+    /**
+     * deleteCustomer deletes the customer object from the database
+     * and application
+     * @throws Exception
+     */
     void deleteCustomer() throws Exception {
 
         if (!lblCustomerID.getText().equals("New")) {
@@ -290,6 +343,14 @@ public class customerEditController implements Initializable {
             //TODO: delete appointments as well for this customer
         }
     }
+
+    /**
+     * validateInput checks the textfields and labels to
+     * make sure that user input is valid according to
+     * the rubric requirements
+     * @return this return is used to return the error messages
+     * based on unhappy path user input
+     */
 
     boolean validateInput() {
 
